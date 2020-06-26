@@ -10,7 +10,7 @@ namespace WCFMiddleware
     class WOLogin : IWorkflowOrchestrator
     {
         private MSG _message;
-        private BLLogin BLLogin;
+        private readonly BLLogin BLLogin;
 
         public WOLogin()
         {
@@ -26,20 +26,18 @@ namespace WCFMiddleware
 
                 if (logged)
                 {
-                    string login = _message.data[0].ToString();
-                    _message.data = new object[1];
-                    _message.data[0] = BLLogin.GetToken(login);
+                    _message.tokenUser = BLLogin.GetToken(_message.data[0].ToString());
 
-                    if (_message.data[0] == null)
+                    if (_message.tokenUser == null)
                     {
                         _message.info = "Error while generating token";
                         _message.statusOp = false;
                     }
                     else
                     {
-                        _message.info = "Logged in succesfully";
+                        _message.info = "Logged in successfully";
                         _message.statusOp = true;
-                        Console.WriteLine("Returned token: " + _message.data[0]);
+                        Console.WriteLine("Returned token: " + _message.tokenUser);
                     }
                 }
                 else
@@ -54,7 +52,6 @@ namespace WCFMiddleware
                 _message.statusOp = false;
             }
 
-            Console.WriteLine(_message.info);
             return _message;
         }
     }

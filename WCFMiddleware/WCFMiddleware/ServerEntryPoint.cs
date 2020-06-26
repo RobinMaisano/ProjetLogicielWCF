@@ -9,7 +9,7 @@ namespace WCFMiddleware
 {
     public class ServerEntryPoint : IServerEntryPoint
     {
-        private string _tokenApp = "4ppT0k3n";
+        private readonly string _tokenApp = "4ppT0k3n";
         private MSG _message;
         private IService _service;
 
@@ -23,6 +23,7 @@ namespace WCFMiddleware
             {
                 _message.info = "Wrong application";
                 _message.statusOp = false;
+                Console.WriteLine(_message.info);
                 return _message;
             }
 
@@ -34,9 +35,9 @@ namespace WCFMiddleware
                 case "Login":
                     _service = new LoginService();
                     break;
-                //case "Decrypt":
-                //    _service = new RegisterService();
-                //    break;
+                case "Decrypt":
+                    _service = new DecryptService();
+                    break;
                 default:
                     _service = null;
                     break;
@@ -47,16 +48,19 @@ namespace WCFMiddleware
             {
                 _message.info = "Wrong operation";
                 _message.statusOp = false;
+                Console.WriteLine(_message.info);
                 return _message;
             }
 
-            return _service.ExecuteService(_message);
+            _message = _service.ExecuteService(_message);
 
+            Console.WriteLine(_message.info);
+            return _message;
         }
 
         public bool CheckTokenApp(string tokenApp)
         {
-            return tokenApp == _tokenApp ? true : false;
+            return tokenApp == _tokenApp;
         }
 
     }
