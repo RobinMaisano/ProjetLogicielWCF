@@ -11,7 +11,7 @@ namespace WCFMiddleware
     {
         public MSG ExecuteService(MSG message)
         {
-            throw new NotImplementedException();
+            return BAC.Dispatch(message);
         }
     }
 }

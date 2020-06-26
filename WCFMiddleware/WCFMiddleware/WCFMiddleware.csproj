@@ -52,17 +52,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BAC.cs" />
-    <Compile Include="BLCrypt.cs" />
-    <Compile Include="BLLogin.cs" />
-    <Compile Include="BLRegister.cs" />
+    <Compile Include="BL\BLDecrypt.cs" />
+    <Compile Include="BL\BLCrypt.cs" />
+    <Compile Include="BL\BLLogin.cs" />
+    <Compile Include="BL\BLRegister.cs" />
+    <Compile Include="Services\DecryptService.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="IWorkflowOrchestrator.cs" />
-    <Compile Include="LoginService.cs" />
-    <Compile Include="RegisterService.cs" />
+    <Compile Include="Services\LoginService.cs" />
+    <Compile Include="Services\RegisterService.cs" />
     <Compile Include="ServerEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WOLogin.cs" />
-    <Compile Include="WORegister.cs" />
+    <Compile Include="WO\WODecrypt.cs" />
+    <Compile Include="WO\WOLogin.cs" />
+    <Compile Include="WO\WORegister.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WCFContract\WCFContract.csproj">

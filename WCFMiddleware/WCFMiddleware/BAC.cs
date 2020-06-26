@@ -9,17 +9,43 @@ namespace WCFMiddleware
 {
     static class BAC
     {
-        static IWorkflowOrchestrator WO;
+        static IWorkflowOrchestrator WO = null;
         static public MSG Dispatch (MSG message)
         {
-            //Check Rights + Dispatch to corresponding WorkflowOrchestrator
-
             //TODO: Check Rights
 
-            WO = new WORegister();
-            return WO.Execute(message);
 
-            //throw new NotImplementedException();
+            //Check Rights + Dispatch to corresponding WorkflowOrchestrator
+            switch (message.operationName)
+            {
+                case "Register":
+                    if (message.appVersion == "V1")
+                        WO = new WORegister();
+                    break;
+
+                case "Login":
+                    if (message.appVersion == "V1")
+                        WO = new WOLogin();
+                    break;
+
+                case "Decrypt":
+                    if (message.appVersion == "V1")
+                        WO = new WODecrypt();
+                    break;
+
+                default:
+                    WO = null;
+                    break;
+            }
+
+            if (WO == null)
+            {
+                message.info = "Unsupported service version";
+                message.statusOp = false;
+                return message;
+            }
+
+            return WO.Execute(message);
         }
     }
 }

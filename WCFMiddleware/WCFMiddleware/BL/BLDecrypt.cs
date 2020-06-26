@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace WCFMiddleware
 {
-    class BLLogin
+    class BLDecrypt
     {
-        public bool Login(string login, string password)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
