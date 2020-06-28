@@ -23,6 +23,7 @@ namespace WCFClientDecrypt
     {
         private MSG msg;
         private Controller controller;
+        private User user;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace WCFClientDecrypt
         private void MainWindow_Load(object sender, EventArgs e)
         {
             this.msg = new MSG();
+            this.user = new User();
             this.controller = new Controller();
         }
 

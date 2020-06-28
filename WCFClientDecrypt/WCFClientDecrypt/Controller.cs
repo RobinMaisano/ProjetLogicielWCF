@@ -11,10 +11,17 @@ namespace WCFClientDecrypt
     {
         private Connection connection;
         private MSG msg;
+        private User user;
         public Controller()
         {
             this.msg = new MSG();
             this.connection = new Connection();
+        }
+        public Controller(User user)
+        {
+            this.msg = new MSG();
+            this.connection = new Connection();
+            this.user = user;
         }
 
         public MSG m_helloworld(MSG msg)
@@ -33,7 +40,8 @@ namespace WCFClientDecrypt
             this.msg.operationName = "Register";
 
             this.msg = this.connection.m_send(this.msg);
-
+            this.user.settokenUser(this.msg.tokenUser);
+            
             return this.msg;
         }
 
@@ -43,6 +51,7 @@ namespace WCFClientDecrypt
             this.msg.operationName = "Login";
 
             this.msg = this.connection.m_send(this.msg);
+            this.user.settokenUser(this.msg.tokenUser);
 
             return this.msg;
         }
@@ -51,6 +60,7 @@ namespace WCFClientDecrypt
         {
             this.msg = msg;
             this.msg.operationName = "Decrypt";
+            this.msg.tokenUser = this.user.gettokenUser();
 
             this.msg = this.connection.m_send(this.msg);
 
