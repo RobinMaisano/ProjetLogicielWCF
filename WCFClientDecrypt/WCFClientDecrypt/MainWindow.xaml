@@ -14,22 +14,26 @@
         <Label x:Name="labelPswd" Content="Enter password" HorizontalAlignment="Center" Height="30" Margin="0,0,100,0" VerticalAlignment="Center" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label x:Name="labelEmail" Content="Enter Email" HorizontalAlignment="Center" Height="30" Margin="0,100,100,0" VerticalAlignment="Center" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <PasswordBox x:Name="passwordBox" HorizontalAlignment="Center" Height="20" Margin="100,0,0,0" VerticalAlignment="Center" Width="100"/>
-        <TextBox x:Name="emailBox" HorizontalAlignment="Center" Height="20" Margin="100,100,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="100" TextChanged="EmailBox_TextChanged"/>
+        <TextBox x:Name="emailBox" HorizontalAlignment="Center" Height="20" Margin="100,100,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="100" />
         <Button x:Name="RegisterChangeButton" Content="RegisterPage" HorizontalAlignment="Center" Margin="0,50,100,0" VerticalAlignment="Top" Width="75" Click="RegisterChangeButton_Click"/>
-        <Button x:Name="LoginChangeButton" Content="LoginPage" HorizontalAlignment="Center" Margin="100,50,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="RegisterButton" Content="Register" HorizontalAlignment="Center" Margin="80,200,0,0" VerticalAlignment="Center" Width="75"/>
-        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Center" Margin="80,200,0,0" VerticalAlignment="Center" Width="75" d:IsHidden="True"/>
+        <Button x:Name="LoginChangeButton" Content="LoginPage" HorizontalAlignment="Center" Margin="100,50,0,0" VerticalAlignment="Top" Width="75" Click="LoginChangeButton_Click"/>
+        <Button x:Name="RegisterButton" Content="Register" HorizontalAlignment="Center" Margin="80,200,0,0" VerticalAlignment="Center" Width="75" Click="RegisterButton_Click"/>
+        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Center" Margin="80,200,0,0" VerticalAlignment="Center" Width="75" Click="LoginButton_Click" d:IsHidden="True"/>
         <Label x:Name="label2" Content="Decrypt" Grid.Column="2" HorizontalAlignment="Center" Height="30" Margin="0,10,0,0" VerticalAlignment="Top" Width="100" HorizontalContentAlignment="Center" FontSize="16" FontWeight="Bold" d:IsHidden="True"/>
         <Label x:Name="labelWelcome" Content="Welcome" HorizontalAlignment="Left" Height="30" Margin="10,20,0,0" VerticalAlignment="Top" Width="80" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" d:IsHidden="True"/>
         <Label x:Name="labelUsername" HorizontalAlignment="Left" Height="30" Margin="100,20,0,0" VerticalAlignment="Top" Width="150" BorderThickness="1" BorderBrush="Black" d:IsHidden="True"/>
         <Label x:Name="labelFilesSelect" Content="Select Files" HorizontalAlignment="Center" Margin="0,80,450,0" VerticalAlignment="Top" FontSize="14" d:IsHidden="True"/>
         <ListBox x:Name="listFiles" HorizontalAlignment="Center" Height="150" Margin="0,0,300,0" VerticalAlignment="Center" Width="230" Grid.Column="2" SelectionMode="Multiple" d:IsHidden="True"/>
-        <Button x:Name="decryptButton" Content="Decrypt" HorizontalAlignment="Center" Height="34" Margin="0,200,150,0" VerticalAlignment="Center" Width="90" d:IsHidden="True"/>
+        <Button x:Name="decryptButton" Content="Decrypt" HorizontalAlignment="Center" Height="34" Margin="0,200,150,0" VerticalAlignment="Center" Width="90" Click="DecryptButton_Click" d:IsHidden="True"/>
         <Label x:Name="labelResult" Content="Result" HorizontalAlignment="Center" Margin="100,80,0,0" VerticalAlignment="Top" FontSize="14" d:IsHidden="True"/>
         <TextBlock x:Name="ResultBlock" HorizontalAlignment="Center" Height="150" Margin="300,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="230" IsEnabled="False" d:IsHidden="True"/>
-        <Button x:Name="LogoutButton" Content="Logout" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Width="75" d:IsHidden="True"/>
+        <Button x:Name="LogoutButton" Content="Logout" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Width="75" Click="LogoutButton_Click" d:IsHidden="True"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,386,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" d:IsHidden="True"/>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="148,386,0,0" VerticalAlignment="Top" Width="75" Click="OnClick1" d:IsHidden="True"/>
+        <StackPanel x:Name="InfoPanel" Height="200" Margin="10" Width="400" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True">
+            <TextBox x:Name="InfoPanelBox" Margin="10" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:IsHidden="True"/>
+            <Button x:Name="InfoButton" Content="OK" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="50" Height="20" Click="InfoButton_Click" d:IsHidden="True" />
+        </StackPanel>
 
 
     </Grid>

@@ -13,29 +13,36 @@ namespace WCFClientDecrypt
         private string tokenUser;
         public User() { }
 
-        public string getlogin()
+        public string Getlogin()
         {
             return this.login;
         }
-        public void setlogin(string login)
+        public void Setlogin(string login)
         {
             this.login = login;
         }
-        public string getpassword()
+        public string Getpassword()
         {
             return this.password;
         }
-        public void setpassword(string password)
+        public void Setpassword(string password)
         {
             this.password = password;
         }
-        public string gettokenUser()
+        public string GettokenUser()
         {
             return this.tokenUser;
         }
-        public void settokenUser(string tokenUser)
+        public void SettokenUser(string tokenUser)
         {
             this.tokenUser = tokenUser;
+        }
+
+        public void ResetValues()
+        {
+            this.login = "";
+            this.password = "";
+            this.tokenUser = "";
         }
     }
 }

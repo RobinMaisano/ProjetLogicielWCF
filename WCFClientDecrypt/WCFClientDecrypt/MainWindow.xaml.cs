@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 using WCFClientDecrypt.proxy;
 
 namespace WCFClientDecrypt
@@ -34,6 +35,7 @@ namespace WCFClientDecrypt
             this.msg = new MSG();
             this.user = new User();
             this.controller = new Controller();
+            this.ChangeLayoutLogin();
         }
 
         private void OnClick1(object sender, RoutedEventArgs e)
@@ -49,9 +51,186 @@ namespace WCFClientDecrypt
             }
         }
 
-        private void RegisterChangeButton_Click(object sender, RoutedEventArgs e)
+        private void ChangeLayoutRegister()
         {
             this.label.Visibility = Visibility.Visible;
+            this.label1.Visibility = Visibility.Hidden;
+            this.labelLogin.Visibility = Visibility.Visible;
+            this.loginBox.Visibility = Visibility.Visible;
+            this.labelPswd.Visibility = Visibility.Visible;
+            this.passwordBox.Visibility = Visibility.Visible;
+            this.labelEmail.Visibility = Visibility.Visible;
+            this.emailBox.Visibility = Visibility.Visible;
+            this.RegisterChangeButton.Visibility = Visibility.Hidden;
+            this.LoginChangeButton.Visibility = Visibility.Visible;
+            this.RegisterButton.Visibility = Visibility.Visible;
+            this.loginButton.Visibility = Visibility.Hidden;
+
+            this.label2.Visibility = Visibility.Hidden;
+            this.labelWelcome.Visibility = Visibility.Hidden;
+            this.labelUsername.Visibility = Visibility.Hidden;
+            this.labelFilesSelect.Visibility = Visibility.Hidden;
+            this.listFiles.Visibility = Visibility.Hidden;
+            this.decryptButton.Visibility = Visibility.Hidden;
+            this.labelResult.Visibility = Visibility.Hidden;
+            this.ResultBlock.Visibility = Visibility.Hidden;
+            this.LogoutButton.Visibility = Visibility.Hidden;
+
+            this.textBox.Visibility = Visibility.Hidden;
+            this.button.Visibility = Visibility.Hidden;
+            this.InfoPanel.Visibility = Visibility.Hidden;
+        }
+
+        private void ChangeLayoutLogin()
+        {
+            this.label.Visibility = Visibility.Hidden;
+            this.label1.Visibility = Visibility.Visible;
+            this.labelLogin.Visibility = Visibility.Visible;
+            this.loginBox.Visibility = Visibility.Visible;
+            this.labelPswd.Visibility = Visibility.Visible;
+            this.passwordBox.Visibility = Visibility.Visible;
+            this.labelEmail.Visibility = Visibility.Hidden;
+            this.emailBox.Visibility = Visibility.Hidden;
+            this.RegisterChangeButton.Visibility = Visibility.Visible;
+            this.LoginChangeButton.Visibility = Visibility.Hidden;
+            this.RegisterButton.Visibility = Visibility.Visible;
+            this.loginButton.Visibility = Visibility.Visible;
+
+            this.label2.Visibility = Visibility.Hidden;
+            this.labelWelcome.Visibility = Visibility.Hidden;
+            this.labelUsername.Visibility = Visibility.Hidden;
+            this.labelFilesSelect.Visibility = Visibility.Hidden;
+            this.listFiles.Visibility = Visibility.Hidden;
+            this.decryptButton.Visibility = Visibility.Hidden;
+            this.labelResult.Visibility = Visibility.Hidden;
+            this.ResultBlock.Visibility = Visibility.Hidden;
+            this.LogoutButton.Visibility = Visibility.Hidden;
+
+            this.textBox.Visibility = Visibility.Hidden;
+            this.button.Visibility = Visibility.Hidden;
+            this.InfoPanel.Visibility = Visibility.Hidden;
+        }
+
+        private void ChangeLayoutLoggedIn()
+        {
+            this.label.Visibility = Visibility.Hidden;
+            this.label1.Visibility = Visibility.Hidden;
+            this.labelLogin.Visibility = Visibility.Hidden;
+            this.loginBox.Visibility = Visibility.Hidden;
+            this.labelPswd.Visibility = Visibility.Hidden;
+            this.passwordBox.Visibility = Visibility.Hidden;
+            this.labelEmail.Visibility = Visibility.Hidden;
+            this.emailBox.Visibility = Visibility.Hidden;
+            this.RegisterChangeButton.Visibility = Visibility.Hidden;
+            this.LoginChangeButton.Visibility = Visibility.Hidden;
+            this.RegisterButton.Visibility = Visibility.Hidden;
+            this.loginButton.Visibility = Visibility.Hidden;
+
+            this.label2.Visibility = Visibility.Visible;
+            this.labelWelcome.Visibility = Visibility.Visible;
+            this.labelUsername.Visibility = Visibility.Visible;
+            this.labelFilesSelect.Visibility = Visibility.Visible;
+            this.listFiles.Visibility = Visibility.Visible;
+            this.decryptButton.Visibility = Visibility.Visible;
+            this.labelResult.Visibility = Visibility.Visible;
+            this.ResultBlock.Visibility = Visibility.Visible;
+            this.LogoutButton.Visibility = Visibility.Visible;
+
+            this.textBox.Visibility = Visibility.Hidden;
+            this.button.Visibility = Visibility.Hidden;
+            this.InfoPanel.Visibility = Visibility.Hidden;
+        }
+
+        private void RegisterChangeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.ChangeLayoutRegister();
+        }
+
+        private void LoginChangeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.ChangeLayoutLogin();
+        }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            Regex rgxlogin = new Regex(@"^[A-z]+$");
+            Regex rgxpassword = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+            Regex rgxmail = new Regex(@"^/\S+@\S+\.\S+/$");
+            if(rgxlogin.IsMatch(this.loginBox.Text) && rgxpassword.IsMatch(this.passwordBox.Password) && rgxmail.IsMatch(this.emailBox.Text))
+            {
+                //this.msg = this.controller.m_register(this.msg);
+
+                //condition if register result is good
+                if (true)
+                {
+                    this.ChangeLayoutLoggedIn();
+                }
+                //TODO show|treat result of msg
+            }
+            else
+            {
+                if(rgxlogin.IsMatch(this.loginBox.Text))
+                {
+                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Login should be only Alphabetical letters \n";
+                    this.InfoPanel.Visibility = Visibility.Visible;
+                }
+                if(rgxpassword.IsMatch(this.passwordBox.Password))
+                {
+                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Password must be at least 8 character long, contain a Lowercase, an Uppercase, a number and a special character \n";
+                    this.InfoPanel.Visibility = Visibility.Visible;
+                }
+                if (rgxmail.IsMatch(this.emailBox.Text){
+                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "The email entered is not a valid email";
+                    this.InfoPanel.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            Regex rgxlogin = new Regex(@"^[A-z]+$");
+            Regex rgxpassword = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+            if (rgxlogin.IsMatch(this.loginBox.Text) && rgxpassword.IsMatch(this.passwordBox.Password))
+            {
+                //this.msg = this.controller.m_login(this.msg);
+
+                //condition if register result is good
+                if (true)
+                {
+                    this.ChangeLayoutLoggedIn();
+                }
+            }
+            else
+            {
+                if (rgxlogin.IsMatch(this.loginBox.Text))
+                {
+                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Login should be only Alphabetical letters \n";
+                    this.InfoPanel.Visibility = Visibility.Visible;
+                }
+                if (rgxpassword.IsMatch(this.passwordBox.Password))
+                {
+                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Password must be at least 8 character long, contain a Lowercase, an Uppercase, a number and a special character \n";
+                    this.InfoPanel.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.user.ResetValues();
+            this.ChangeLayoutLogin();
+        }
+
+        private void DecryptButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            this.msg = this.controller.m_decrypt(this.msg);
+        }
+
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.InfoPanelBox.Text = "";
+            this.InfoPanel.Visibility = Visibility.Hidden;
         }
     }
 }
