@@ -46,5 +46,10 @@ namespace WCFClientDecrypt
                 this.textBox.Text = "Operation Failed" + this.msg.info;
             }
         }
+
+        private void RegisterChangeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.label.Visibility = Visibility.Visible;
+        }
     }
 }
