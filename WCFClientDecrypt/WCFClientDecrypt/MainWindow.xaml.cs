@@ -269,8 +269,37 @@ namespace WCFClientDecrypt
 
         private void DecryptButton_Click(object sender, RoutedEventArgs e)
         {
-
+            List<string> filesPath = new List<string;
+            foreach(object file in this.listFiles.SelectedItems)
+            {
+                filesPath.Add(file.ToString());
+            }
+            object[] predata = new object[this.listFiles.SelectedItems.Count];
+            int k = 0;
+            Regex rgx = new Regex(@"[^\\]*$");
+            foreach(string path in filesPath)
+            {
+                Dictionary<string, string> fileDict = new Dictionary<string, string>();
+                string filename = rgx.Match(path).ToString();
+                string fileContent = controller.GetFileContent(path);
+                fileDict.Add(filename, fileContent);
+                predata[k] = fileDict;
+            }
             this.msg = this.controller.m_decrypt(this.msg);
+            this.InfoPanelBox.Text = this.msg.info + "\n";
+
+            //condition if Decrypt result is good
+            if (this.msg.statusOp)
+            {
+                this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Decrypt Request successful";
+                this.InfoPanel.Visibility = Visibility.Visible;
+                this.ChangeLayoutLoggedIn();
+            }
+            else
+            {
+                this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Decrypt Request failed";
+                this.InfoPanel.Visibility = Visibility.Visible;
+            }
         }
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)
