@@ -41,6 +41,13 @@ namespace WCFClientDecrypt
             this.msg = msg;
             this.msg.operationName = "Register";
 
+            if (ConfigurationManager.AppSettings.Get("test") == "y")
+            {
+                this.msg.statusOp = true;
+                this.msg.info = "You went through and got back";
+                return this.msg;
+            }
+
             this.msg = this.connection.m_send(this.msg);
             this.user.SettokenUser(this.msg.tokenUser);
             
@@ -52,6 +59,13 @@ namespace WCFClientDecrypt
             this.msg = msg;
             this.msg.operationName = "Login";
 
+            if (ConfigurationManager.AppSettings.Get("test") == "y")
+            {
+                this.msg.statusOp = true;
+                this.msg.info = "Logged in successsfully";
+                return this.msg;
+            }
+
             this.msg = this.connection.m_send(this.msg);
             this.user.SettokenUser(this.msg.tokenUser);
 
@@ -62,6 +76,23 @@ namespace WCFClientDecrypt
         {
             this.msg = msg;
             this.msg.operationName = "Decrypt";
+
+            if (ConfigurationManager.AppSettings.Get("test") == "y")
+            {
+                this.msg.statusOp = true;
+                this.msg.info = "The request was accepted";
+                Object[] predata = new Object[this.msg.data.Count()];
+                int k = 0;
+                foreach (Dictionary<string, string> fileDict in this.msg.data)
+                {
+                    fileDict["title"] = this.user.Getlogin() + fileDict["title"];
+                    predata[k] = fileDict;
+                    k++;
+                }
+                this.msg.data = predata;
+                return this.msg;
+            }
+
             this.msg.tokenUser = this.user.GettokenUser();
 
             this.msg = this.connection.m_send(this.msg);

@@ -11,7 +11,10 @@ namespace WCFClientDecrypt
         private string login;
         private string password;
         private string tokenUser;
-        public User() { }
+        public User()
+        {
+            this.login = "notSet";
+        }
 
         public string Getlogin()
         {

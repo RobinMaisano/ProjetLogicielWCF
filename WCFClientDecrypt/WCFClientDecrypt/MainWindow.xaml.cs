@@ -34,7 +34,7 @@ namespace WCFClientDecrypt
         {
             this.msg = new MSG();
             this.user = new User();
-            this.controller = new Controller();
+            this.controller = new Controller(this.user);
             this.ChangeLayoutLogin();
         }
 
@@ -269,7 +269,7 @@ namespace WCFClientDecrypt
 
         private void DecryptButton_Click(object sender, RoutedEventArgs e)
         {
-            List<string> filesPath = new List<string;
+            List<string> filesPath = new List<string>();
             foreach(object file in this.listFiles.SelectedItems)
             {
                 filesPath.Add(file.ToString());
@@ -282,18 +282,22 @@ namespace WCFClientDecrypt
                 Dictionary<string, string> fileDict = new Dictionary<string, string>();
                 string filename = rgx.Match(path).ToString();
                 string fileContent = controller.GetFileContent(path);
-                fileDict.Add(filename, fileContent);
+                fileDict.Add("title", filename);
+                fileDict.Add("content", fileContent);
                 predata[k] = fileDict;
+                k++;
             }
+            this.msg.data = predata;
             this.msg = this.controller.m_decrypt(this.msg);
-            this.InfoPanelBox.Text = this.msg.info + "\n";
+            this.InfoPanelBox.Text = this.msg.info + "\n" + this.msg.data.ToString() + "\n";
 
             //condition if Decrypt result is good
             if (this.msg.statusOp)
             {
                 this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Decrypt Request successful";
                 this.InfoPanel.Visibility = Visibility.Visible;
-                this.ChangeLayoutLoggedIn();
+                // TODO 
+                // Start request Checking
             }
             else
             {
