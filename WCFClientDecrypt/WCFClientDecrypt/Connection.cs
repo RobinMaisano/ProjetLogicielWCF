@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
+using System.Configuration;
 using WCFClientDecrypt.proxy;
 
 namespace WCFClientDecrypt
@@ -22,11 +23,23 @@ namespace WCFClientDecrypt
         public MSG m_send(MSG msg)
         {
             this.msg = msg;
-            this.msg.tokenApp = "4ppT0k3n";
-            this.msg.appVersion = "V1";
+            this.msg.tokenApp = ConfigurationManager.AppSettings.Get("tokenApp");
+            this.msg.appVersion = ConfigurationManager.AppSettings.Get("appVersion");
 
-
-            this.msg = this.prox.m_service(this.msg);
+            try
+            {
+                this.msg = this.prox.m_service(this.msg);
+            }
+            catch(EndpointNotFoundException ex)
+            {
+                this.msg.statusOp = false;
+                this.msg.info = ex.ToString();
+            }
+            catch (Exception ex)
+            {
+                this.msg.statusOp = false;
+                this.msg.info = ex.ToString();
+            }
 
             return this.msg;
         }

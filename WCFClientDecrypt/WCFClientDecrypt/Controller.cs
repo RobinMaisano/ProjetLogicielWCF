@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Configuration;
 using WCFClientDecrypt.proxy;
 
 namespace WCFClientDecrypt
@@ -65,6 +67,17 @@ namespace WCFClientDecrypt
             this.msg = this.connection.m_send(this.msg);
 
             return this.msg;
+        }
+
+        public string[] GetListFile()
+        {
+            string location = @"..\..\fileToDecrypt";
+            if (ConfigurationManager.AppSettings.Get("fileLocation") != "")
+            {
+                location = ConfigurationManager.AppSettings.Get("fileLocation");
+            }
+            string[] listFile = Directory.GetFiles(location);
+            return listFile;
         }
     }
 }

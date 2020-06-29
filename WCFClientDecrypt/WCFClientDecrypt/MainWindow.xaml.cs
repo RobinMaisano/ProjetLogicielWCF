@@ -71,6 +71,7 @@ namespace WCFClientDecrypt
             this.labelUsername.Visibility = Visibility.Hidden;
             this.labelFilesSelect.Visibility = Visibility.Hidden;
             this.listFiles.Visibility = Visibility.Hidden;
+            this.UpdateButton.Visibility = Visibility.Hidden;
             this.decryptButton.Visibility = Visibility.Hidden;
             this.labelResult.Visibility = Visibility.Hidden;
             this.ResultBlock.Visibility = Visibility.Hidden;
@@ -101,6 +102,7 @@ namespace WCFClientDecrypt
             this.labelUsername.Visibility = Visibility.Hidden;
             this.labelFilesSelect.Visibility = Visibility.Hidden;
             this.listFiles.Visibility = Visibility.Hidden;
+            this.UpdateButton.Visibility = Visibility.Hidden;
             this.decryptButton.Visibility = Visibility.Hidden;
             this.labelResult.Visibility = Visibility.Hidden;
             this.ResultBlock.Visibility = Visibility.Hidden;
@@ -130,7 +132,9 @@ namespace WCFClientDecrypt
             this.labelWelcome.Visibility = Visibility.Visible;
             this.labelUsername.Visibility = Visibility.Visible;
             this.labelFilesSelect.Visibility = Visibility.Visible;
+            this.FillListFile();
             this.listFiles.Visibility = Visibility.Visible;
+            this.UpdateButton.Visibility = Visibility.Visible;
             this.decryptButton.Visibility = Visibility.Visible;
             this.labelResult.Visibility = Visibility.Visible;
             this.ResultBlock.Visibility = Visibility.Visible;
@@ -139,6 +143,17 @@ namespace WCFClientDecrypt
             this.textBox.Visibility = Visibility.Hidden;
             this.button.Visibility = Visibility.Hidden;
             this.InfoPanel.Visibility = Visibility.Hidden;
+        }
+
+        private void FillListFile()
+        {
+            string[] fileList = controller.GetListFile();
+            this.listFiles.Items.Clear();
+            foreach (string file in fileList)
+            {
+                this.listFiles.Items.Add(file);
+            }
+            
         }
 
         private void RegisterChangeButton_Click(object sender, RoutedEventArgs e)
@@ -160,9 +175,11 @@ namespace WCFClientDecrypt
             {
                 this.user.Setlogin(this.loginBox.Text);
                 this.user.Setpassword(this.passwordBox.Password);
-                this.msg.data[0] = this.loginBox.Text;
-                this.msg.data[1] = this.passwordBox.Password;
-                this.msg.data[2] = this.emailBox.Text;
+                object[] preData = new object[3];
+                preData[0] = this.loginBox.Text;
+                preData[1] = this.passwordBox.Password;
+                preData[2] = this.emailBox.Text;
+                this.msg.data = preData;
                 this.msg = this.controller.m_register(this.msg);
                 this.InfoPanelBox.Text = this.msg.info + "\n";
 
@@ -182,17 +199,18 @@ namespace WCFClientDecrypt
             }
             else
             {
-                if(rgxlogin.IsMatch(this.loginBox.Text))
+                if(!rgxlogin.IsMatch(this.loginBox.Text))
                 {
                     this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Login should be only Alphabetical letters \n";
                     this.InfoPanel.Visibility = Visibility.Visible;
                 }
-                if(rgxpassword.IsMatch(this.passwordBox.Password))
+                if(!rgxpassword.IsMatch(this.passwordBox.Password))
                 {
                     this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Password must be at least 8 character long, contain a Lowercase, an Uppercase, a number and a special character \n";
                     this.InfoPanel.Visibility = Visibility.Visible;
                 }
-                if (rgxmail.IsMatch(this.emailBox.Text){
+                if (!rgxmail.IsMatch(this.emailBox.Text))
+                {
                     this.InfoPanelBox.Text = this.InfoPanelBox.Text + "The email entered is not a valid email";
                     this.InfoPanel.Visibility = Visibility.Visible;
                 }
@@ -207,8 +225,10 @@ namespace WCFClientDecrypt
             {
                 this.user.Setlogin(this.loginBox.Text);
                 this.user.Setpassword(this.passwordBox.Password);
-                this.msg.data[0] = this.loginBox.Text;
-                this.msg.data[1] = this.passwordBox.Password;
+                object[] preData = new object[2];
+                preData[0] = this.loginBox.Text;
+                preData[1] = this.passwordBox.Password;
+                this.msg.data = preData;
                 
                 this.msg = this.controller.m_login(this.msg);
                 this.InfoPanelBox.Text = this.msg.info + "\n";
@@ -228,12 +248,12 @@ namespace WCFClientDecrypt
             }
             else
             {
-                if (rgxlogin.IsMatch(this.loginBox.Text))
+                if (!rgxlogin.IsMatch(this.loginBox.Text))
                 {
                     this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Login should be only Alphabetical letters \n";
                     this.InfoPanel.Visibility = Visibility.Visible;
                 }
-                if (rgxpassword.IsMatch(this.passwordBox.Password))
+                if (!rgxpassword.IsMatch(this.passwordBox.Password))
                 {
                     this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Password must be at least 8 character long, contain a Lowercase, an Uppercase, a number and a special character \n";
                     this.InfoPanel.Visibility = Visibility.Visible;
@@ -257,6 +277,21 @@ namespace WCFClientDecrypt
         {
             this.InfoPanelBox.Text = "";
             this.InfoPanel.Visibility = Visibility.Hidden;
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.FillListFile();
+        }
+
+        private void RegisterPass_Click(object sender, RoutedEventArgs e)
+        {
+            this.ChangeLayoutRegister();
+        }
+
+        private void DecryptPass_Click(object sender, RoutedEventArgs e)
+        {
+            this.ChangeLayoutLoggedIn();
         }
     }
 }
