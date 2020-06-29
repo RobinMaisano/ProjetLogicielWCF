@@ -74,6 +74,7 @@ namespace WCFClientDecrypt
             this.UpdateButton.Visibility = Visibility.Hidden;
             this.decryptButton.Visibility = Visibility.Hidden;
             this.labelResult.Visibility = Visibility.Hidden;
+            this.ResultScroll.Visibility = Visibility.Hidden;
             this.ResultBlock.Visibility = Visibility.Hidden;
             this.LogoutButton.Visibility = Visibility.Hidden;
 
@@ -105,6 +106,7 @@ namespace WCFClientDecrypt
             this.UpdateButton.Visibility = Visibility.Hidden;
             this.decryptButton.Visibility = Visibility.Hidden;
             this.labelResult.Visibility = Visibility.Hidden;
+            this.ResultScroll.Visibility = Visibility.Hidden;
             this.ResultBlock.Visibility = Visibility.Hidden;
             this.LogoutButton.Visibility = Visibility.Hidden;
 
@@ -137,6 +139,7 @@ namespace WCFClientDecrypt
             this.UpdateButton.Visibility = Visibility.Visible;
             this.decryptButton.Visibility = Visibility.Visible;
             this.labelResult.Visibility = Visibility.Visible;
+            this.ResultScroll.Visibility = Visibility.Visible;
             this.ResultBlock.Visibility = Visibility.Visible;
             this.LogoutButton.Visibility = Visibility.Visible;
 
@@ -270,14 +273,14 @@ namespace WCFClientDecrypt
         private void DecryptButton_Click(object sender, RoutedEventArgs e)
         {
             List<string> filesPath = new List<string>();
-            foreach(object file in this.listFiles.SelectedItems)
+            foreach (object file in this.listFiles.SelectedItems)
             {
                 filesPath.Add(file.ToString());
             }
             object[] predata = new object[this.listFiles.SelectedItems.Count];
             int k = 0;
             Regex rgx = new Regex(@"[^\\]*$");
-            foreach(string path in filesPath)
+            foreach (string path in filesPath)
             {
                 Dictionary<string, string> fileDict = new Dictionary<string, string>();
                 string filename = rgx.Match(path).ToString();
@@ -289,7 +292,7 @@ namespace WCFClientDecrypt
             }
             this.msg.data = predata;
             this.msg = this.controller.m_decrypt(this.msg);
-            this.InfoPanelBox.Text = this.msg.info + "\n" + this.msg.data.ToString() + "\n";
+            this.InfoPanelBox.Text = this.msg.info + "\n" + ((Dictionary<string, string>)this.msg.data[0])["title"] + "\n" + ((Dictionary<string, string>)this.msg.data[0])["content"] + "\n";
 
             //condition if Decrypt result is good
             if (this.msg.statusOp)
@@ -298,6 +301,17 @@ namespace WCFClientDecrypt
                 this.InfoPanel.Visibility = Visibility.Visible;
                 // TODO 
                 // Start request Checking
+                this.msg = this.controller.m_checkIsDecrypted(this.msg);
+                this.ResultBlock.Text = "";
+                foreach(Dictionary<string, string> resultDict in this.msg.data)
+                {
+                    this.ResultBlock.Text = this.ResultBlock.Text + resultDict["title"] + "\n" +
+                        resultDict["content"] + "\n" +
+                        resultDict["key"] + "\n" +
+                        resultDict["trust"] + "\n" +
+                        resultDict["secretInfo"] + "\n" +
+                        "\n";
+                }
             }
             else
             {

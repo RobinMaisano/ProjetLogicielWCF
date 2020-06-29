@@ -63,6 +63,8 @@ namespace WCFClientDecrypt
             {
                 this.msg.statusOp = true;
                 this.msg.info = "Logged in successsfully";
+                this.msg.tokenUser = "itsATokenUserISwear";
+                this.user.SettokenUser(this.msg.tokenUser);
                 return this.msg;
             }
 
@@ -81,16 +83,57 @@ namespace WCFClientDecrypt
             {
                 this.msg.statusOp = true;
                 this.msg.info = "The request was accepted";
+                this.msg.tokenUser = "itsATokenUserISwear";
                 Object[] predata = new Object[this.msg.data.Count()];
                 int k = 0;
                 foreach (Dictionary<string, string> fileDict in this.msg.data)
                 {
-                    fileDict["title"] = this.user.Getlogin() + fileDict["title"];
+                    fileDict["title"] = this.user.Getlogin() + "." + fileDict["title"];
                     predata[k] = fileDict;
                     k++;
                 }
                 this.msg.data = predata;
+                this.user.SettokenUser(this.msg.tokenUser);
                 return this.msg;
+            }
+
+            this.msg.tokenUser = this.user.GettokenUser();
+
+            this.msg = this.connection.m_send(this.msg);
+
+            return this.msg;
+        }
+
+        public MSG m_checkIsDecrypted(MSG msg)
+        {
+            msg.operationName = "IsDecrypted";
+
+            if (ConfigurationManager.AppSettings.Get("test") == "y")
+            {
+                msg.statusOp = true;
+                msg.info = "The result are out";
+                Object[] predata = new Object[msg.data.Count()];
+                int k = 0;
+                foreach (Dictionary<string, string> fileDict in msg.data)
+                {
+                    Dictionary<string, string> resultDict = new Dictionary<string, string>();
+                    resultDict.Add("title", fileDict["title"]);
+                    resultDict.Add("content", fileDict["content"]);
+                    resultDict.Add("key", "AAA" + k.ToString());
+                    resultDict.Add("trust", (100 - k).ToString());
+                    if (msg.data.Count() == k + 2)
+                    {
+                        resultDict.Add("secretInfo", "This is secret");
+                    }
+                    else
+                    {
+                        resultDict.Add("secretInfo", "");
+                    }
+                    predata[k] = resultDict;
+                    k++;
+                }
+                msg.data = predata;
+                return msg;
             }
 
             this.msg.tokenUser = this.user.GettokenUser();
