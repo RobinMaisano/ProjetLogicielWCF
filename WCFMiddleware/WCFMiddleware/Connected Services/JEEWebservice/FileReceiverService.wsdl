@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://messagereceiver.bank.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="FileReceiverService" targetNamespace="http://messagereceiver.bank.com/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:12080/FileReceiverService/FileReceiverService?xsd=1" namespace="http://messagereceiver.bank.com/" />
+    </xsd:schema>
+  </types>
+  <message name="messageReader">
+    <part name="parameters" element="tns:messageReader" />
+  </message>
+  <message name="messageReaderResponse">
+    <part name="parameters" element="tns:messageReaderResponse" />
+  </message>
+  <portType name="FileReceiverEndp">
+    <operation name="messageReader">
+      <input wsam:Action="http://messagereceiver.bank.com/FileReceiverEndp/messageReaderRequest" message="tns:messageReader" />
+      <output wsam:Action="http://messagereceiver.bank.com/FileReceiverEndp/messageReaderResponse" message="tns:messageReaderResponse" />
+    </operation>
+  </portType>
+  <binding name="FileReceiverPortBinding" type="tns:FileReceiverEndp">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="messageReader">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="FileReceiverService">
+    <port name="FileReceiverPort" binding="tns:FileReceiverPortBinding">
+      <soap:address location="http://localhost:12080/FileReceiverService/FileReceiverService" />
+    </port>
+  </service>
+</definitions>

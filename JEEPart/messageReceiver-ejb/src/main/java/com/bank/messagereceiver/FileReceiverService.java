@@ -38,14 +38,13 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
     
     //Get the message from C#
     @Override
-    //public String getMessage(String message, String key, String fileName){
-    public String getMessage(String message){
+    public String getMessage(String message, String key, String fileName){
+    //public String getMessage(String message){
 
         System.out.println("response : " + message);
-        /*if (message.length() != 0){
+        if (message.length() != 0){
             try {
                 sendMessage(message, key, fileName);
-                
             } catch (Exception e) {
             System.out.println("Exception raised : "+e);
             }
@@ -53,10 +52,7 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
         } 
         else {
             return "Empty parameter";
-        }*/
-        
-        
-        return "error";
+        }
     }
     
     //Translate the received message and send it to the JMS queue
@@ -67,6 +63,7 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
         messageObject[0] = message;
         messageObject[1] = key;
         messageObject[2] = fileName;
+        String concatMessage = message + "\n" + key + "\n" + fileName;
 
         try {
             //obtention d'une instance JAXBContext associée au type Payment annoté avec JAX-B
@@ -82,8 +79,8 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
             //affichage du XML dans la console de sortie
             System.out.println(xmlMessage);*/
             
-            
-            TextMessage msg = context.createTextMessage(messageObject[0]);
+            TextMessage msg = context.createTextMessage(concatMessage);
+            //TextMessage msg = context.createTextMessage(messageObject[0]);
             //ObjectMessage o = context.createObjectMessage(messageObject);
             //MapMessage mapMessage = context.createMapMessage();
             //mapMessage.setString("Message", message);

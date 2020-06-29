@@ -43,6 +43,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +58,11 @@
     <Compile Include="BL\BLCrypt.cs" />
     <Compile Include="BL\BLLogin.cs" />
     <Compile Include="BL\BLRegister.cs" />
+    <Compile Include="Connected Services\JEEWebservice\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="DecryptionInformations.cs" />
     <Compile Include="FileStatusHandler.cs" />
     <Compile Include="Services\DecryptService.cs" />
@@ -81,7 +88,32 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Connected Services\JEEWebservice\FileReceiverService.wsdl" />
+    <None Include="Connected Services\JEEWebservice\FileReceiverService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\JEEWebservice\WCFMiddleware.JEEWebservice.messageReaderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\JEEWebservice\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\JEEWebservice\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\JEEWebservice\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\JEEWebservice\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
