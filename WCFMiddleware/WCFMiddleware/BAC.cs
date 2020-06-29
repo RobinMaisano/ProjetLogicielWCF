@@ -14,7 +14,6 @@ namespace WCFMiddleware
         static IWorkflowOrchestrator WO = null;
         static public MSG Dispatch (MSG message)
         {
-
             switch (message.operationName)
             {
                 case "Register":
@@ -30,6 +29,16 @@ namespace WCFMiddleware
                 case "Decrypt":
                     if (message.appVersion == "V1")
                         WO = new WODecrypt();
+                    break;
+
+                case "Decrypted":
+                    if (message.appVersion == "V1")
+                        WO = new WODecrypted();
+                    break;
+
+                case "IsDecrypted":
+                    if (message.appVersion == "V1")
+                        WO = new WOIsDecrypted();
                     break;
 
                 default:
