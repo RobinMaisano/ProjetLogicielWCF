@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.bank.messagereceiver;
 
 import javax.xml.ws.Endpoint;
 
 
 /**
- *
- * @author cesi
+ * 
+ * 
  */
+//a simple class to test the webservice TODELETE
 public class WebServicePublisher {
     
     public static final String URI = "http://localhost:12080/displayMessage";

@@ -13,5 +13,6 @@
 	admin port : 12 048
 	Provider PORT : 12 076
 3. 
-	Database global name : orcl
-	Database psw : Cesi1234
+	Database global name : frenchDictionnary
+	SID : frenchDictio
+	Database psw : Cesi123!

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.bank.messagereceiver;
 
 import java.io.StringWriter;
@@ -24,7 +19,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 /**
- *
+ * Producer & File Receiver
  * @author cesi
  */
 @Stateless
@@ -41,6 +36,7 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
     @Resource(lookup = "jms/messageQueue") //paquetage javax.annotation
     private Queue messageQueue; //paquetage javax.jms
     
+    //Get the message from C#
     @Override
     public String getMessage(String message, String key, String fileName){
         if (message.length() != 0){
@@ -58,6 +54,7 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
         }
     }
     
+    //Translate the received message and send it to the JMS queue
     private void sendMessage(String message, String key, String fileName){
         //utilisation de l'API JAX-B de gestion de flux pour marshaller (transformer) l'objet //Payment en chaine XML
         JAXBContext jaxbContext;
@@ -80,7 +77,7 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
             //affichage du XML dans la console de sortie
             System.out.println(xmlMessage);*/
             
-            //encapsulation du paiement au format XML dans un objet javax.jms.TextMessage
+            
             TextMessage msg = context.createTextMessage(messageObject[0]);
             //ObjectMessage o = context.createObjectMessage(messageObject);
             //MapMessage mapMessage = context.createMapMessage();
@@ -88,7 +85,7 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
             //mapMessage.setString("Key", key);
             //mapMessage.setString("fileName", fileName);
             
-            //envoi du message dans la queue paymentQueue
+            //Send the message to the messageQueue
             context.createProducer().send(messageQueue, msg);
             //context.createProducer().send(messageQueue, o);
             //context.createProducer().send(messageQueue, mapMessage);

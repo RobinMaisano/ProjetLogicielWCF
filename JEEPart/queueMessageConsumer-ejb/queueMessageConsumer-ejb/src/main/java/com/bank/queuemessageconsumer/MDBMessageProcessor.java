@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.bank.queuemessageconsumer;
 
 import java.util.logging.Level;
@@ -14,8 +9,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 
 /**
- *
- * @author cesi
+ * MsgConsumer
  */
 @MessageDriven(activationConfig = {
     @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/messageQueue")
