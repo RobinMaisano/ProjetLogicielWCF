@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.ServiceModel;
 using WCFMiddleware;
+using System.Net;
+using System.IO;
+using WCFServer.JEEWebservice;
 
 namespace WCFServer
 {
@@ -15,6 +18,7 @@ namespace WCFServer
 
         static void Main(string[] args)
         {
+
             host = new ServiceHost(typeof(ServerEntryPoint));
 
             try

@@ -13,5 +13,6 @@ import javax.jws.WebService;
 public interface FileReceiverServiceEndpointInterface {
     @WebMethod(operationName="messageReader")
     @WebResult(name="messageReceived")
-    String getMessage(@WebParam(name = "message") String message, @WebParam(name = "key") String key, @WebParam(name = "fileName") String fileName);
+    //String getMessage(@WebParam(name = "message") String message, @WebParam(name = "key") String key, @WebParam(name = "fileName") String fileName);
+    String getMessage(@WebParam(name = "message") String message);
 }

@@ -1,12 +1,12 @@
 1. 
-	domain : MessageChecker (message consumer)
+	domain : MessageChecker (message consumer) ==> queueMessageConsumer-ejb
 	mdp : amessage
 	mdp master: amessage
 	port : 10 000
 	admin port : 10048
 
 2. 
-	domain : MessageReceiverJMS (webservice)
+	domain : MessageReceiverJMS (webservice) ==> messageReceiver-ejb
 	mdp : areceiver
 	mdp master : areceiver
 	port : 12 000

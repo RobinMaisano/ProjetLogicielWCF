@@ -38,9 +38,11 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
     
     //Get the message from C#
     @Override
-    public String getMessage(String message, String key, String fileName){
-        if (message.length() != 0){
-            
+    //public String getMessage(String message, String key, String fileName){
+    public String getMessage(String message){
+
+        System.out.println("response : " + message);
+        /*if (message.length() != 0){
             try {
                 sendMessage(message, key, fileName);
                 
@@ -51,7 +53,10 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
         } 
         else {
             return "Empty parameter";
-        }
+        }*/
+        
+        
+        return "error";
     }
     
     //Translate the received message and send it to the JMS queue
@@ -87,6 +92,7 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
             
             //Send the message to the messageQueue
             context.createProducer().send(messageQueue, msg);
+            
             //context.createProducer().send(messageQueue, o);
             //context.createProducer().send(messageQueue, mapMessage);
             System.out.println("Message : " + messageObject[0] + " has been sent to the queue messageQueue!");
