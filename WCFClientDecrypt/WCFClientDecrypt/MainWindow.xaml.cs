@@ -158,12 +158,25 @@ namespace WCFClientDecrypt
             Regex rgxmail = new Regex(@"^/\S+@\S+\.\S+/$");
             if(rgxlogin.IsMatch(this.loginBox.Text) && rgxpassword.IsMatch(this.passwordBox.Password) && rgxmail.IsMatch(this.emailBox.Text))
             {
-                //this.msg = this.controller.m_register(this.msg);
+                this.user.Setlogin(this.loginBox.Text);
+                this.user.Setpassword(this.passwordBox.Password);
+                this.msg.data[0] = this.loginBox.Text;
+                this.msg.data[1] = this.passwordBox.Password;
+                this.msg.data[2] = this.emailBox.Text;
+                this.msg = this.controller.m_register(this.msg);
+                this.InfoPanelBox.Text = this.msg.info + "\n";
 
                 //condition if register result is good
-                if (true)
+                if (this.msg.statusOp)
                 {
+                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Register successful";
+                    this.InfoPanel.Visibility = Visibility.Visible;
                     this.ChangeLayoutLoggedIn();
+                }
+                else
+                {
+                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Register failed";
+                    this.InfoPanel.Visibility = Visibility.Visible;
                 }
                 //TODO show|treat result of msg
             }
@@ -192,12 +205,25 @@ namespace WCFClientDecrypt
             Regex rgxpassword = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
             if (rgxlogin.IsMatch(this.loginBox.Text) && rgxpassword.IsMatch(this.passwordBox.Password))
             {
-                //this.msg = this.controller.m_login(this.msg);
+                this.user.Setlogin(this.loginBox.Text);
+                this.user.Setpassword(this.passwordBox.Password);
+                this.msg.data[0] = this.loginBox.Text;
+                this.msg.data[1] = this.passwordBox.Password;
+                
+                this.msg = this.controller.m_login(this.msg);
+                this.InfoPanelBox.Text = this.msg.info + "\n";
 
-                //condition if register result is good
-                if (true)
+                //condition if login result is good
+                if (this.msg.statusOp)
                 {
+                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Login successful";
+                    this.InfoPanel.Visibility = Visibility.Visible;
                     this.ChangeLayoutLoggedIn();
+                }
+                else
+                {
+                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Login failed";
+                    this.InfoPanel.Visibility = Visibility.Visible;
                 }
             }
             else
