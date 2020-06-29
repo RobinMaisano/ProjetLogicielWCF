@@ -1,91 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WCFMiddleware
 {
     class BLDecrypt
     {
-        string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-        int keyLength = 4;
-        int maximumKey;
+        readonly string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        readonly int keyLength = 4;
         
-        public void DecryptString(string stringToDecrypt)
+
+        public void DecryptFile(string fileName, string fileContent)
         {
-            maximumKey = (int)Math.Pow(alphabet.Length, keyLength);
+            int i = 0;
+            int maximumKey = (int)Math.Pow(alphabet.Length, keyLength);
 
-            for (int i = 0; i < maximumKey; i++)
+            DecryptionInformations decryptionInformations; 
+            FileStatusHandler FSH = FileStatusHandler.Instance;
+            FSH.FileStatus.TryGetValue(fileName, out decryptionInformations);
+
+            while (i < maximumKey && decryptionInformations.Decrypted != true)
             {
-
+                Console.WriteLine(FSH.changed);
                 //Generate Key
-                string key = alphabet[(int)(i / Math.Pow(alphabet.Length, 3))] + ""
-                                    + alphabet[(int)(i / Math.Pow(alphabet.Length, 2))] + ""
-                                    + alphabet[(int)(i / alphabet.Length)] + ""
-                                    + alphabet[i % alphabet.Length];
+                string key = GenerateKey(i);
 
                 //Decrypt String
-                ASCIIEncoding ascii = new ASCIIEncoding();
-                Byte[] bytesString = ascii.GetBytes(stringToDecrypt);
-                Byte[] bytesKey = ascii.GetBytes(key);
-                Byte[] bytesDecrypted = new Byte[bytesString.Length];
+                string contentDecrypted = DecryptString(key, fileContent);
 
-                for (int j = 0; j < bytesString.Length; j++)
-                    bytesDecrypted[i] = (Byte)(bytesString[i] ^ bytesKey[i % keyLength]);
 
-                string stringDecrypted = ascii.GetString(bytesDecrypted);
+                //Send Decrypted Content to JavaEE
+                SendToJava(fileName, contentDecrypted, key);
 
-                //Send Decrypted to JavaEE
-                Console.WriteLine(stringDecrypted);
-                
+                i++;
+                FSH.FileStatus.TryGetValue(fileName, out decryptionInformations);
+
+                //Console.WriteLine(contentDecrypted);
             }
-
-
         }
-        public string DecryptStringTest(string stringToDecrypt)
+
+        public string GenerateKey(int keyNb)
         {
-            maximumKey = (int)Math.Pow(alphabet.Length, keyLength);
-            maximumKey = 3;
+            return alphabet[(int)(keyNb / Math.Pow(alphabet.Length, 3))] + ""
+                                    + alphabet[(int)(keyNb / Math.Pow(alphabet.Length, 2))] + ""
+                                    + alphabet[(int)(keyNb / alphabet.Length)] + ""
+                                    + alphabet[keyNb % alphabet.Length];
+        }
 
-            string lastKey = "";
-            string lastDecryption = "";
-            Console.WriteLine(stringToDecrypt);
-            for (int i = 0; i < maximumKey; i++)
-            {
+        public string DecryptString(string key, string textToDecrypt)
+        {
+            ASCIIEncoding ascii = new ASCIIEncoding();
+            Byte[] bytesString = ascii.GetBytes(textToDecrypt);
+            Byte[] bytesKey = ascii.GetBytes(key);
+            Byte[] bytesDecrypted = new Byte[bytesString.Length];
 
-                //Generate Key
-                string key = alphabet[(int)(i / Math.Pow(alphabet.Length, 3))] + ""
-                                    + alphabet[(int)(i / Math.Pow(alphabet.Length, 2))] + ""
-                                    + alphabet[(int)(i / alphabet.Length)] + ""
-                                    + alphabet[i % alphabet.Length];
+            for (int i = 0; i < bytesString.Length; i++)
+                bytesDecrypted[i] = (Byte)(bytesString[i] ^ bytesKey[i % keyLength]);
 
-                //Decrypt String
-                ASCIIEncoding ascii = new ASCIIEncoding();
-                Byte[] bytesString = ascii.GetBytes(stringToDecrypt);
-                Byte[] bytesKey = ascii.GetBytes(key);
-                Byte[] bytesDecrypted = new Byte[bytesString.Length];
+            return ascii.GetString(bytesDecrypted);
+        }
 
-                Console.WriteLine("Byte length: " + bytesString.Length);
+        public void SendToJava(string fileName, string content, string key)
+        {
 
-                for (int j = 0; j < bytesString.Length; j++)
-                    bytesDecrypted[j] = (Byte)(bytesString[j] ^ bytesKey[j % keyLength]);
-
-                string stringDecrypted = ascii.GetString(bytesDecrypted);
-
-                //Send Decrypted to JavaEE
-                Console.WriteLine($"Key: {key}, String: {stringDecrypted}");
-
-                bytesDecrypted.ToList().ForEach(b => Console.WriteLine(b));
-
-                lastKey = key;
-                lastDecryption = stringDecrypted;
-            }
+            Console.WriteLine($"Sent to Java: {fileName}, key: {key}, result: {content}");
+            Thread.Sleep(200);
 
 
-            return $"Key: {lastKey}, String: {lastDecryption}";
+            //WebRequest request = WebRequest.Create("");
 
+
+
+            //throw new NotImplementedException();
         }
 
     }

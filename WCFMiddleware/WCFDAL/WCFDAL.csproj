@@ -61,6 +61,10 @@
     <Compile Include="Migrations\202006252132068_CreateAccreditation.designer.cs">
       <DependentUpon>202006252132068_CreateAccreditation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006271733456_AddLoginUnique.cs" />
+    <Compile Include="Migrations\202006271733456_AddLoginUnique.designer.cs">
+      <DependentUpon>202006271733456_AddLoginUnique.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accreditation.cs" />
     <Compile Include="Models\Privilege.cs" />
@@ -78,6 +82,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006252132068_CreateAccreditation.resx">
       <DependentUpon>202006252132068_CreateAccreditation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006271733456_AddLoginUnique.resx">
+      <DependentUpon>202006271733456_AddLoginUnique.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

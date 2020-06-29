@@ -42,7 +42,16 @@ namespace WCFMiddleware
                     _service = null;
                     break;
             }
-            
+            Console.WriteLine("Message operation name: " + _message.operationName);
+            if (_message.operationName == "Decrypted")
+            {
+                Console.WriteLine("Decrypted: " + _message.data[0].ToString());
+                FileStatusHandler statusHandler = FileStatusHandler.Instance;
+                DecryptionInformations informations = new DecryptionInformations { FileName = _message.data[0].ToString(), Key = "AABC", Confidence = 50.2, OriginalFileContent = "Pouet pouet", Decrypted = true };
+                statusHandler.FileStatus[_message.data[0].ToString()] = informations;
+                statusHandler.changed = "true";
+            }
+
             // If service does not exists
             if (_service == null)
             {
@@ -51,6 +60,7 @@ namespace WCFMiddleware
                 Console.WriteLine(_message.info);
                 return _message;
             }
+
 
             _message = _service.ExecuteService(_message);
 

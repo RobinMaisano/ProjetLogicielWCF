@@ -12,8 +12,6 @@ namespace WCFDAL
 {
     public class DAO : DbContext
     {
-        
-
         public DAO() : base("WCF")
         {
         }
@@ -26,6 +24,7 @@ namespace WCFDAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingEntitySetNameConvention>();
+            modelBuilder.Entity<User>().HasIndex(u => u.Login ).IsUnique(true);
             Database.SetInitializer<DAO>(null);
             base.OnModelCreating(modelBuilder);
         }
@@ -46,11 +45,6 @@ namespace WCFDAL
                     return _instance;
                 }
             }
-        }
-
-        public bool AddUser(string login, string password)
-        {
-            throw new NotImplementedException();
         }
     }
 }

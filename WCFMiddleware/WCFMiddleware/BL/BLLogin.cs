@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using WCFDAL;
 using WCFDAL.Models;
@@ -14,7 +15,6 @@ namespace WCFMiddleware
         {
 
             DAO DAO = DAO.Instance;
-
             User user = DAO.Users.Where(u => u.Login == login).FirstOrDefault();
 
             //TODO: Crypt password

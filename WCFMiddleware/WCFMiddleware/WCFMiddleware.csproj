@@ -56,6 +56,8 @@
     <Compile Include="BL\BLCrypt.cs" />
     <Compile Include="BL\BLLogin.cs" />
     <Compile Include="BL\BLRegister.cs" />
+    <Compile Include="DecryptionInformations.cs" />
+    <Compile Include="FileStatusHandler.cs" />
     <Compile Include="Services\DecryptService.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="IWorkflowOrchestrator.cs" />
