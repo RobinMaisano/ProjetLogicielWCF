@@ -33,10 +33,6 @@
         <Button x:Name="LogoutButton" Content="Logout" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Width="75" Click="LogoutButton_Click" d:IsHidden="True"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,386,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" d:IsHidden="True"/>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="148,386,0,0" VerticalAlignment="Top" Width="75" Click="OnClick1" d:IsHidden="True"/>
-        <StackPanel x:Name="InfoPanel" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True" Background="Gray">
-            <TextBox x:Name="InfoPanelBox" Margin="10" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:IsHidden="True" IsReadOnly="True" MaxWidth="200" TextWrapping="Wrap" MaxHeight="350" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" />
-            <Button x:Name="InfoButton" Content="OK" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="50" Height="20" Click="InfoButton_Click" d:IsHidden="True" />
-        </StackPanel>
         <Button x:Name="registerPass" Content="RegisterPass" HorizontalAlignment="Left" Margin="459,375,0,0" VerticalAlignment="Top" Width="75" Click="RegisterPass_Click"/>
         <Button x:Name="DecryptPass" Content="DecryptPass" HorizontalAlignment="Left" Margin="596,375,0,0" VerticalAlignment="Top" Width="75" Click="DecryptPass_Click"/>
 

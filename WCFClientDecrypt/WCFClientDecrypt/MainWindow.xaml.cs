@@ -80,7 +80,6 @@ namespace WCFClientDecrypt
 
             this.textBox.Visibility = Visibility.Hidden;
             this.button.Visibility = Visibility.Hidden;
-            this.InfoPanel.Visibility = Visibility.Hidden;
         }
 
         private void ChangeLayoutLogin()
@@ -112,7 +111,6 @@ namespace WCFClientDecrypt
 
             this.textBox.Visibility = Visibility.Hidden;
             this.button.Visibility = Visibility.Hidden;
-            this.InfoPanel.Visibility = Visibility.Hidden;
         }
 
         private void ChangeLayoutLoggedIn()
@@ -145,7 +143,6 @@ namespace WCFClientDecrypt
 
             this.textBox.Visibility = Visibility.Hidden;
             this.button.Visibility = Visibility.Hidden;
-            this.InfoPanel.Visibility = Visibility.Hidden;
         }
 
         private void FillListFile()
@@ -184,38 +181,39 @@ namespace WCFClientDecrypt
                 preData[2] = this.emailBox.Text;
                 this.msg.data = preData;
                 this.msg = this.controller.m_register(this.msg);
-                this.InfoPanelBox.Text = this.msg.info + "\n";
+                string infoAlert = this.msg.info + "\n";
 
                 //condition if register result is good
                 if (this.msg.statusOp)
                 {
-                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Register successful";
-                    this.InfoPanel.Visibility = Visibility.Visible;
+                    infoAlert = infoAlert + "Register successful";
+                    MessageBox.Show(infoAlert);
                     this.ChangeLayoutLoggedIn();
                 }
                 else
                 {
-                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Register failed";
-                    this.InfoPanel.Visibility = Visibility.Visible;
+                    infoAlert = infoAlert + "Register failed";
+                    MessageBox.Show(infoAlert);
                 }
                 //TODO show|treat result of msg
             }
             else
             {
-                if(!rgxlogin.IsMatch(this.loginBox.Text))
+                string infoAlert = "";
+                if (!rgxlogin.IsMatch(this.loginBox.Text))
                 {
-                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Login should be only Alphabetical letters \n";
-                    this.InfoPanel.Visibility = Visibility.Visible;
+                    infoAlert = infoAlert + "Login should be only Alphabetical letters \n";
+                    MessageBox.Show(infoAlert);
                 }
                 if(!rgxpassword.IsMatch(this.passwordBox.Password))
                 {
-                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Password must be at least 8 character long, contain a Lowercase, an Uppercase, a number and a special character \n";
-                    this.InfoPanel.Visibility = Visibility.Visible;
+                    infoAlert = infoAlert + "Password must be at least 8 character long, contain a Lowercase, an Uppercase, a number and a special character \n";
+                    MessageBox.Show(infoAlert);
                 }
                 if (!rgxmail.IsMatch(this.emailBox.Text))
                 {
-                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "The email entered is not a valid email";
-                    this.InfoPanel.Visibility = Visibility.Visible;
+                    infoAlert = infoAlert + "The email entered is not a valid email";
+                    MessageBox.Show(infoAlert);
                 }
             }
         }
@@ -234,32 +232,33 @@ namespace WCFClientDecrypt
                 this.msg.data = preData;
                 
                 this.msg = this.controller.m_login(this.msg);
-                this.InfoPanelBox.Text = this.msg.info + "\n";
+                string infoAlert = this.msg.info + "\n";
 
                 //condition if login result is good
                 if (this.msg.statusOp)
                 {
-                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Login successful";
-                    this.InfoPanel.Visibility = Visibility.Visible;
+                    infoAlert = infoAlert + "Login successful";
+                    MessageBox.Show(infoAlert);
                     this.ChangeLayoutLoggedIn();
                 }
                 else
                 {
-                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Login failed";
-                    this.InfoPanel.Visibility = Visibility.Visible;
+                    infoAlert = infoAlert + "Login failed";
+                    MessageBox.Show(infoAlert);
                 }
             }
             else
             {
+                string infoAlert = "";
                 if (!rgxlogin.IsMatch(this.loginBox.Text))
                 {
-                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Login should be only Alphabetical letters \n";
-                    this.InfoPanel.Visibility = Visibility.Visible;
+                    infoAlert = infoAlert + "Login should be only Alphabetical letters \n";
+                    MessageBox.Show(infoAlert);
                 }
                 if (!rgxpassword.IsMatch(this.passwordBox.Password))
                 {
-                    this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Password must be at least 8 character long, contain a Lowercase, an Uppercase, a number and a special character \n";
-                    this.InfoPanel.Visibility = Visibility.Visible;
+                    infoAlert = infoAlert + "Password must be at least 8 character long, contain a Lowercase, an Uppercase, a number and a special character \n";
+                    MessageBox.Show(infoAlert);
                 }
             }
         }
@@ -292,16 +291,16 @@ namespace WCFClientDecrypt
             }
             this.msg.data = predata;
             this.msg = this.controller.m_decrypt(this.msg);
-            this.InfoPanelBox.Text = this.msg.info + "\n" + ((Dictionary<string, string>)this.msg.data[0])["title"] + "\n" + ((Dictionary<string, string>)this.msg.data[0])["content"] + "\n";
+            string infoAlert = this.msg.info + "\n" + ((Dictionary<string, string>)this.msg.data[0])["title"] + "\n" + ((Dictionary<string, string>)this.msg.data[0])["content"] + "\n";
 
             //condition if Decrypt result is good
             if (this.msg.statusOp)
             {
-                this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Decrypt Request successful";
-                this.InfoPanel.Visibility = Visibility.Visible;
+                infoAlert = infoAlert + "Decrypt Request successful";
+                MessageBox.Show(infoAlert);
                 // TODO 
                 // Start request Checking
-                this.msg = this.controller.m_checkIsDecrypted(this.msg);
+                this.msg = this.controller.m_checkIsDecrypted_loop(this.msg);
                 this.ResultBlock.Text = "";
                 foreach(Dictionary<string, string> resultDict in this.msg.data)
                 {
@@ -315,15 +314,9 @@ namespace WCFClientDecrypt
             }
             else
             {
-                this.InfoPanelBox.Text = this.InfoPanelBox.Text + "Decrypt Request failed";
-                this.InfoPanel.Visibility = Visibility.Visible;
+                infoAlert = infoAlert + "Decrypt Request failed";
+                MessageBox.Show(infoAlert);
             }
-        }
-
-        private void InfoButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.InfoPanelBox.Text = "";
-            this.InfoPanel.Visibility = Visibility.Hidden;
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 using System.Configuration;
@@ -18,6 +19,10 @@ namespace WCFClientDecrypt
         {
             this.msg = new MSG();
             this.connection = new Connection();
+            if (ConfigurationManager.AppSettings.Get("test") == "y")
+            {
+                this.connection.Set_middleware_test(new Fake_middleware_test(this.user));
+            }
         }
         public Controller(User user)
         {
@@ -32,6 +37,7 @@ namespace WCFClientDecrypt
             this.msg.operationName = "Hello world";
 
             this.msg = this.connection.m_send(this.msg);
+            this.user.SettokenUser(this.msg.tokenUser);
 
             return this.msg;
         }
@@ -40,13 +46,6 @@ namespace WCFClientDecrypt
         {
             this.msg = msg;
             this.msg.operationName = "Register";
-
-            if (ConfigurationManager.AppSettings.Get("test") == "y")
-            {
-                this.msg.statusOp = true;
-                this.msg.info = "You went through and got back";
-                return this.msg;
-            }
 
             this.msg = this.connection.m_send(this.msg);
             this.user.SettokenUser(this.msg.tokenUser);
@@ -59,15 +58,6 @@ namespace WCFClientDecrypt
             this.msg = msg;
             this.msg.operationName = "Login";
 
-            if (ConfigurationManager.AppSettings.Get("test") == "y")
-            {
-                this.msg.statusOp = true;
-                this.msg.info = "Logged in successsfully";
-                this.msg.tokenUser = "itsATokenUserISwear";
-                this.user.SettokenUser(this.msg.tokenUser);
-                return this.msg;
-            }
-
             this.msg = this.connection.m_send(this.msg);
             this.user.SettokenUser(this.msg.tokenUser);
 
@@ -79,24 +69,6 @@ namespace WCFClientDecrypt
             this.msg = msg;
             this.msg.operationName = "Decrypt";
 
-            if (ConfigurationManager.AppSettings.Get("test") == "y")
-            {
-                this.msg.statusOp = true;
-                this.msg.info = "The request was accepted";
-                this.msg.tokenUser = "itsATokenUserISwear";
-                Object[] predata = new Object[this.msg.data.Count()];
-                int k = 0;
-                foreach (Dictionary<string, string> fileDict in this.msg.data)
-                {
-                    fileDict["title"] = this.user.Getlogin() + "." + fileDict["title"];
-                    predata[k] = fileDict;
-                    k++;
-                }
-                this.msg.data = predata;
-                this.user.SettokenUser(this.msg.tokenUser);
-                return this.msg;
-            }
-
             this.msg.tokenUser = this.user.GettokenUser();
 
             this.msg = this.connection.m_send(this.msg);
@@ -106,41 +78,25 @@ namespace WCFClientDecrypt
 
         public MSG m_checkIsDecrypted(MSG msg)
         {
+            //this.msg = msg;
             msg.operationName = "IsDecrypted";
+            msg.tokenUser = this.user.GettokenUser();
 
-            if (ConfigurationManager.AppSettings.Get("test") == "y")
+            msg = this.connection.m_send(msg);
+
+
+            return msg;
+        }
+
+        public MSG m_checkIsDecrypted_loop(MSG msg)
+        {
+            this.msg.statusOp = false;
+            while (msg.statusOp == false)
             {
-                msg.statusOp = true;
-                msg.info = "The result are out";
-                Object[] predata = new Object[msg.data.Count()];
-                int k = 0;
-                foreach (Dictionary<string, string> fileDict in msg.data)
-                {
-                    Dictionary<string, string> resultDict = new Dictionary<string, string>();
-                    resultDict.Add("title", fileDict["title"]);
-                    resultDict.Add("content", fileDict["content"]);
-                    resultDict.Add("key", "AAA" + k.ToString());
-                    resultDict.Add("trust", (100 - k).ToString());
-                    if (msg.data.Count() == k + 2)
-                    {
-                        resultDict.Add("secretInfo", "This is secret");
-                    }
-                    else
-                    {
-                        resultDict.Add("secretInfo", "");
-                    }
-                    predata[k] = resultDict;
-                    k++;
-                }
-                msg.data = predata;
-                return msg;
+                msg = this.m_checkIsDecrypted(msg);
+                Thread.Sleep(30000);
             }
-
-            this.msg.tokenUser = this.user.GettokenUser();
-
-            this.msg = this.connection.m_send(this.msg);
-
-            return this.msg;
+            return msg;
         }
 
         public string[] GetListFile()
