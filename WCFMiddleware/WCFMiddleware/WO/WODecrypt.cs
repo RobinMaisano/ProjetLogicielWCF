@@ -14,24 +14,37 @@ namespace WCFMiddleware
     {
         public MSG Execute(MSG message)
         {
+            Thread decryptProcess = new Thread(_ => { DecryptProcess(message); });
+            decryptProcess.Start();
+
+            message.info = "Decryption is running";
+            message.statusOp = true;
+
+            return message;
+        }
+
+        private int GetProcessorNb()
+        {
+            return Environment.ProcessorCount;
+        }
+
+        private void DecryptProcess(MSG message)
+        {
             BLDecrypt BLDecrypt = new BLDecrypt();
-
-            //Thread t1 = new Thread(() => BLDecrypt.DecryptString("test"));
-
-            int nbData = message.data.Length;
 
             string login = DAO.Instance.Users.Where(u => u.Token == message.tokenUser).FirstOrDefault().Login;
 
-            String[,] filesToDecrypt = new string[2, nbData/2];
-
+            String[,] filesToDecrypt = new string[2, message.data.Length];
 
             FileStatusHandler fileStatusHandler = FileStatusHandler.Instance;
-            int iData = 0, iDecrypt = 0;
-            while (iData < message.data.Length) {
-                filesToDecrypt[0, iDecrypt] = login + "." + message.data[iData++].ToString();
-                filesToDecrypt[1, iDecrypt] = message.data[iData].ToString();
-                fileStatusHandler.FileStatus.Add(filesToDecrypt[0, iDecrypt], new DecryptionInformations { FileName = filesToDecrypt[0, iDecrypt], OriginalFileContent = filesToDecrypt[1, iDecrypt], Decrypted = false });
-                iData++; iDecrypt++;
+
+            int iData = 0;
+            foreach (Dictionary<string, string> file in message.data)
+            {
+                filesToDecrypt[0, iData] = login + "." + file["title"];
+                filesToDecrypt[1, iData] = file["content"];
+                fileStatusHandler.FileStatus.Add(filesToDecrypt[0, iData], new DecryptionInformations { FileName = filesToDecrypt[0, iData], OriginalFileContent = file["content"], Decrypted = false });
+                iData++;
             }
 
             int maxThread = GetProcessorNb();
@@ -39,7 +52,7 @@ namespace WCFMiddleware
 
             Thread[] runningThreadList = new Thread[maxThread];
 
-            while (startedThread < (filesToDecrypt.Length/2) && startedThread < maxThread)
+            while (startedThread < (filesToDecrypt.Length / 2) && startedThread < maxThread)
             {
                 Thread threadToStart = new Thread(() => BLDecrypt.DecryptFile(filesToDecrypt[0, startedThread], filesToDecrypt[1, startedThread]));
                 runningThreadList[startedThread] = threadToStart;
@@ -49,11 +62,11 @@ namespace WCFMiddleware
             }
 
 
-            while (startedThread < filesToDecrypt.Length/2)
+            while (startedThread < filesToDecrypt.Length / 2)
             {
                 for (int i = 0; i < runningThreadList.Length; i++)
                 {
-                    if (runningThreadList[i] != null && runningThreadList[i].ThreadState == ThreadState.Stopped && startedThread < filesToDecrypt.Length/2)
+                    if (runningThreadList[i] != null && runningThreadList[i].ThreadState == ThreadState.Stopped && startedThread < filesToDecrypt.Length / 2)
                     {
                         runningThreadList[i] = new Thread(() => BLDecrypt.DecryptFile(filesToDecrypt[0, startedThread], filesToDecrypt[1, startedThread]));
                         runningThreadList[i].Start();
@@ -64,18 +77,12 @@ namespace WCFMiddleware
                 Thread.Sleep(1000);
             }
 
-            //string result = BLDecrypt.DecryptStringTest(" ./).43b");
+            // Join all threads
 
-            //message.info = result;
-            message.info = "Running";
-            message.statusOp = true;
-            return message;
+            // Generate PDF
+
+            // Send Email
+
         }
-
-        private int GetProcessorNb()
-        {
-            return Environment.ProcessorCount;
-        }
-
     }
 }

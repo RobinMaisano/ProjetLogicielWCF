@@ -68,24 +68,11 @@ namespace WCFMiddleware
         public void SendToJava(string fileName, string content, string key)
         {
 
-            string message = "Aonjour Bonjour!";
-
             FileReceiverEndpClient client = new FileReceiverEndpClient();
             Console.WriteLine("content : "+content);
             client.messageReader(content, key, fileName);
 
-
-            Console.WriteLine($"Sent to Java: {fileName}, key: {key}, result: {content}");
             Thread.Sleep(200);
-
-
-
-            //WebRequest request = WebRequest.Create("");
-
-
-
-            //throw new NotImplementedException();
         }
-
     }
 }
