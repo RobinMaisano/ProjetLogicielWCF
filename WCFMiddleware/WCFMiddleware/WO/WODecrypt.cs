@@ -14,11 +14,19 @@ namespace WCFMiddleware
     {
         public MSG Execute(MSG message)
         {
-            Thread decryptProcess = new Thread(_ => { DecryptProcess(message); });
-            decryptProcess.Start();
+            try
+            {
+                Thread decryptProcess = new Thread(_ => { DecryptProcess(message); });
+                decryptProcess.Start();
 
-            message.info = "Decryption is running";
-            message.statusOp = true;
+                message.info = "Decryption is running";
+                message.statusOp = true;
+            }
+            catch (Exception)
+            {
+                message.info = "An error occured when launching decryption, please try again later.";
+                message.statusOp = false;
+            }
 
             return message;
         }

@@ -38,6 +38,9 @@ namespace WCFMiddleware
                 case "Decrypt":
                     _service = new DecryptService();
                     break;
+                case "Decrypted":
+                    _service = new DecryptedService();
+                    break;
                 default:
                     _service = null;
                     break;
@@ -47,7 +50,7 @@ namespace WCFMiddleware
             {
                 Console.WriteLine("Decrypted: " + _message.data[0].ToString());
                 FileStatusHandler statusHandler = FileStatusHandler.Instance;
-                DecryptionInformations informations = new DecryptionInformations { FileName = _message.data[0].ToString(), Key = "AABC", Confidence = 50.2, OriginalFileContent = "Pouet pouet", Decrypted = true };
+                DecryptionInformations informations = new DecryptionInformations { FileName = _message.data[0].ToString(), Key = "AABC", Trust = 50.2, OriginalFileContent = "Pouet pouet", Decrypted = true };
                 statusHandler.FileStatus[_message.data[0].ToString()] = informations;
                 statusHandler.changed = "true";
             }

@@ -63,6 +63,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Services\DecryptedService.cs" />
     <Compile Include="DecryptionInformations.cs" />
     <Compile Include="FileStatusHandler.cs" />
     <Compile Include="Services\DecryptService.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Services\RegisterService.cs" />
     <Compile Include="ServerEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WO\WODecrypted.cs" />
     <Compile Include="WO\WODecrypt.cs" />
     <Compile Include="WO\WOLogin.cs" />
     <Compile Include="WO\WORegister.cs" />
