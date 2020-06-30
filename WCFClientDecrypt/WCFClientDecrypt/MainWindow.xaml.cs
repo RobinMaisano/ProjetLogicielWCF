@@ -203,18 +203,16 @@ namespace WCFClientDecrypt
                 if (!rgxlogin.IsMatch(this.loginBox.Text))
                 {
                     infoAlert = infoAlert + "Login should be only Alphabetical letters \n";
-                    MessageBox.Show(infoAlert);
                 }
                 if(!rgxpassword.IsMatch(this.passwordBox.Password))
                 {
                     infoAlert = infoAlert + "Password must be at least 8 character long, contain a Lowercase, an Uppercase, a number and a special character \n";
-                    MessageBox.Show(infoAlert);
                 }
                 if (!rgxmail.IsMatch(this.emailBox.Text))
                 {
                     infoAlert = infoAlert + "The email entered is not a valid email";
-                    MessageBox.Show(infoAlert);
                 }
+                MessageBox.Show(infoAlert);
             }
         }
 
@@ -253,13 +251,12 @@ namespace WCFClientDecrypt
                 if (!rgxlogin.IsMatch(this.loginBox.Text))
                 {
                     infoAlert = infoAlert + "Login should be only Alphabetical letters \n";
-                    MessageBox.Show(infoAlert);
                 }
                 if (!rgxpassword.IsMatch(this.passwordBox.Password))
                 {
                     infoAlert = infoAlert + "Password must be at least 8 character long, contain a Lowercase, an Uppercase, a number and a special character \n";
-                    MessageBox.Show(infoAlert);
                 }
+                MessageBox.Show(infoAlert);
             }
         }
 

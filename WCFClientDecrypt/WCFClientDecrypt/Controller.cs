@@ -19,16 +19,16 @@ namespace WCFClientDecrypt
         {
             this.msg = new MSG();
             this.connection = new Connection();
-            if (ConfigurationManager.AppSettings.Get("test") == "y")
-            {
-                this.connection.Set_middleware_test(new Fake_middleware_test(this.user));
-            }
         }
         public Controller(User user)
         {
             this.msg = new MSG();
             this.connection = new Connection();
             this.user = user;
+            if (ConfigurationManager.AppSettings.Get("test") == "y")
+            {
+                this.connection.Set_middleware_test(new Fake_middleware_test(this.user));
+            }
         }
 
         public MSG m_helloworld(MSG msg)
@@ -90,11 +90,13 @@ namespace WCFClientDecrypt
 
         public MSG m_checkIsDecrypted_loop(MSG msg)
         {
-            this.msg.statusOp = false;
+            msg.statusOp = false;
             while (msg.statusOp == false)
             {
                 msg = this.m_checkIsDecrypted(msg);
-                Thread.Sleep(30000);
+                //Thread.Sleep(30000);
+                //It's long when testing
+                Thread.Sleep(5000);
             }
             return msg;
         }

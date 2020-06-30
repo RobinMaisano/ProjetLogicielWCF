@@ -49,20 +49,20 @@ namespace WCFClientDecrypt
                     this.msg.data = predata;
                     break;
                 case "IsDecrypted":
-                    if (this.countRequestIsDecrypted <= 3)
+                    if (this.countRequestIsDecrypted >= 3)
                     {
-                        msg.statusOp = true;
-                        msg.info = "The result are out";
-                        Object[] pre_data = new Object[msg.data.Count()];
-                        int k = 0;
-                        foreach (Dictionary<string, string> fileDict in msg.data)
+                        this.msg.statusOp = true;
+                        this.msg.info = "The result are out";
+                        Object[] pre_data = new Object[this.msg.data.Count()];
+                        int j = 0;
+                        foreach (Dictionary<string, string> fileDict in this.msg.data)
                         {
                             Dictionary<string, string> resultDict = new Dictionary<string, string>();
                             resultDict.Add("title", fileDict["title"]);
                             resultDict.Add("content", fileDict["content"]);
-                            resultDict.Add("key", "AAA" + k.ToString());
-                            resultDict.Add("trust", (100 - k).ToString());
-                            if (msg.data.Count() == (k / 2) + (k % 2))
+                            resultDict.Add("key", "AAA" + j.ToString());
+                            resultDict.Add("trust", (100 - j).ToString());
+                            if (this.msg.data.Count() == (j / 2) + (j % 2))
                             {
                                 resultDict.Add("secretInfo", "This is secret");
                             }
@@ -70,10 +70,10 @@ namespace WCFClientDecrypt
                             {
                                 resultDict.Add("secretInfo", "");
                             }
-                            pre_data[k] = resultDict;
-                            k++;
+                            pre_data[j] = resultDict;
+                            j++;
                         }
-                        msg.data = pre_data;
+                        this.msg.data = pre_data;
                         this.countRequestIsDecrypted = 0;
                     }
                     else
