@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using WCFContract;
 using WCFDAL;
-using WCFDAL.Models;
 
 namespace WCFMiddleware
 {
@@ -16,11 +13,23 @@ namespace WCFMiddleware
         {
             try
             {
+                string login = DAO.Instance.Users.Where(u => u.Token == message.tokenUser).FirstOrDefault().Login;
+
+                int i = 0;
+                string[] fileNames = new string[message.data.Length];
+                foreach (Dictionary<string, string> file in message.data)
+                {
+                    file["title"] = login + "." + file["title"];
+                    fileNames[i++] = file["title"];
+                }
+
                 Thread decryptProcess = new Thread(_ => { DecryptProcess(message); });
                 decryptProcess.Start();
 
+                Thread.Sleep(100); // To be sure that message has been consummed by Thread before modifying it
                 message.info = "Decryption is running";
                 message.statusOp = true;
+                message.data = fileNames;
             }
             catch (Exception)
             {
@@ -40,8 +49,6 @@ namespace WCFMiddleware
         {
             BLDecrypt BLDecrypt = new BLDecrypt();
 
-            string login = DAO.Instance.Users.Where(u => u.Token == message.tokenUser).FirstOrDefault().Login;
-
             String[,] filesToDecrypt = new string[2, message.data.Length];
 
             FileStatusHandler fileStatusHandler = FileStatusHandler.Instance;
@@ -49,7 +56,7 @@ namespace WCFMiddleware
             int iData = 0;
             foreach (Dictionary<string, string> file in message.data)
             {
-                filesToDecrypt[0, iData] = login + "." + file["title"];
+                filesToDecrypt[0, iData] = file["title"];
                 filesToDecrypt[1, iData] = file["content"];
                 fileStatusHandler.FileStatus.Add(filesToDecrypt[0, iData], new DecryptionInformations { FileName = filesToDecrypt[0, iData], OriginalFileContent = file["content"], Decrypted = false });
                 iData++;
@@ -68,7 +75,6 @@ namespace WCFMiddleware
                 Thread.Sleep(100);
                 startedThread++;
             }
-
 
             while (startedThread < filesToDecrypt.Length / 2)
             {

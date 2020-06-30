@@ -37,6 +37,11 @@ namespace WCFMiddleware
                         WO = new WODecrypted();
                     break;
 
+                case "IsDecrypted":
+                    if (message.appVersion == "V1")
+                        WO = new WOIsDecrypted();
+                    break;
+
                 default:
                     WO = null;
                     break;
