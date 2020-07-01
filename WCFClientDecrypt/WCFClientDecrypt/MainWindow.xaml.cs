@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,7 @@ using WCFClientDecrypt.proxy;
 
 namespace WCFClientDecrypt
 {
+    public delegate void MsgHandlerDelegate();
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
@@ -25,6 +27,8 @@ namespace WCFClientDecrypt
         private MSG msg;
         private Controller controller;
         private User user;
+        private ResultHandler resultHandler;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -297,22 +301,34 @@ namespace WCFClientDecrypt
                 MessageBox.Show(infoAlert);
                 // TODO 
                 // Start request Checking
-                this.msg = this.controller.m_checkIsDecrypted_loop(this.msg);
-                this.ResultBlock.Text = "";
-                foreach(Dictionary<string, string> resultDict in this.msg.data)
-                {
-                    this.ResultBlock.Text = this.ResultBlock.Text + resultDict["title"] + "\n" +
-                        resultDict["content"] + "\n" +
-                        resultDict["key"] + "\n" +
-                        resultDict["trust"] + "\n" +
-                        resultDict["secretInfo"] + "\n" +
-                        "\n";
-                }
+                // replace with creation of specialized class and call of procedure with thread 
+                // pass callback by instancing ResultWriter
+                // Check if TextBlock work as a parameter if not pass window maybe?  prob wont work but whatev
+                // As expected there is a problem with passing the textbox (described as being the property of another thread)
+                this.resultHandler = new ResultHandler(this.msg, this.ResultBlock, this.controller, new MsgHandlerDelegate(ResultWriter));
+                Thread t = new Thread(new ThreadStart(resultHandler.ResultRequestStarter));
+                t.Start();
+                //this.msg = this.controller.m_checkIsDecrypted_loop(this.msg);
             }
             else
             {
                 infoAlert = infoAlert + "Decrypt Request failed";
                 MessageBox.Show(infoAlert);
+            }
+        }
+
+        private void ResultWriter()
+        {
+            MSG msg = this.resultHandler.GetMsg();
+            this.ResultBlock.Text = "";
+            foreach (Dictionary<string, string> resultDict in msg.data)
+            {
+                this.ResultBlock.Text = this.ResultBlock.Text + resultDict["title"] + "\n" +
+                    resultDict["content"] + "\n" +
+                    resultDict["key"] + "\n" +
+                    resultDict["trust"] + "\n" +
+                    resultDict["secretInfo"] + "\n" +
+                    "\n";
             }
         }
 

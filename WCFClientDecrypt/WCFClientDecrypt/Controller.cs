@@ -96,7 +96,7 @@ namespace WCFClientDecrypt
                 msg = this.m_checkIsDecrypted(msg);
                 //Thread.Sleep(30000);
                 //It's long when testing
-                Thread.Sleep(5000);
+                Thread.Sleep(2000);
             }
             return msg;
         }
