@@ -12,8 +12,8 @@ namespace WCFMiddleware
         public string OriginalFileContent;
         public bool Decrypted;
         public string Key;
-        public double Confidence;
-        public string SecretInformation;
+        public double Trust;
+        public string SecretInfo;
 
     }
 }

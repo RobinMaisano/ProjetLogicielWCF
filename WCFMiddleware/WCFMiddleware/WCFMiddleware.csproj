@@ -40,11 +40,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +67,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Services\IsDecryptedService.cs" />
+    <Compile Include="Services\DecryptedService.cs" />
     <Compile Include="DecryptionInformations.cs" />
     <Compile Include="FileStatusHandler.cs" />
     <Compile Include="Services\DecryptService.cs" />
@@ -72,6 +78,8 @@
     <Compile Include="Services\RegisterService.cs" />
     <Compile Include="ServerEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WO\WOIsDecrypted.cs" />
+    <Compile Include="WO\WODecrypted.cs" />
     <Compile Include="WO\WODecrypt.cs" />
     <Compile Include="WO\WOLogin.cs" />
     <Compile Include="WO\WORegister.cs" />
