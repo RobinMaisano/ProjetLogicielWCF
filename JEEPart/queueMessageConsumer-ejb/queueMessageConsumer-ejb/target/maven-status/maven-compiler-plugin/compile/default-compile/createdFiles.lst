@@ -1,0 +1,7 @@
+CSharpResponse\Connection.class
+com\bank\msgchecker\DictChecker.class
+DAO\DAOConnection.class
+com\bank\queuemessageconsumer\MDBMessageProcessor.class
+com\bank\msgchecker\IChecker.class
+com\bank\msgchecker\ContentChecker.class
+com\bank\msgchecker\FileChecker.class

@@ -1,0 +1,17 @@
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\WCFMiddleware.dll.config
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\WCFMiddleware.dll
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\WCFMiddleware.pdb
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\EntityFramework.dll
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\EntityFramework.SqlServer.dll
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\WCFContract.dll
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\WCFDAL.dll
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\WCFContract.pdb
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\WCFDAL.pdb
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\WCFDAL.dll.config
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\EntityFramework.xml
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\bin\Debug\EntityFramework.SqlServer.xml
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\obj\Debug\WCFMiddleware.csprojAssemblyReference.cache
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\obj\Debug\WCFMiddleware.csproj.CoreCompileInputs.cache
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\obj\Debug\WCFMiddleware.csproj.CopyComplete
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\obj\Debug\WCFMiddleware.dll
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFMiddleware\obj\Debug\WCFMiddleware.pdb

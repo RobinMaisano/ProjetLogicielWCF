@@ -1,0 +1,16 @@
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\bin\Debug\WCFDAL.dll.config
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\bin\Debug\WCFDAL.dll
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\bin\Debug\WCFDAL.pdb
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\bin\Debug\EntityFramework.dll
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\bin\Debug\EntityFramework.xml
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\obj\Debug\WCFDAL.csprojAssemblyReference.cache
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\obj\Debug\WCFDAL.Migrations.ChangeModel.resources
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\obj\Debug\WCFDAL.Migrations.CreateAccreditation.resources
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\obj\Debug\WCFDAL.csproj.GenerateResource.cache
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\obj\Debug\WCFDAL.csproj.CoreCompileInputs.cache
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\obj\Debug\WCFDAL.csproj.CopyComplete
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\obj\Debug\WCFDAL.dll
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\obj\Debug\WCFDAL.pdb
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFDAL\obj\Debug\WCFDAL.Migrations.AddLoginUnique.resources
