@@ -1,0 +1,15 @@
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.csprojAssemblyReference.cache
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\MainWindow.g.cs
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\App.g.cs
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt_MarkupCompile.cache
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt_MarkupCompile.lref
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\bin\Debug\WCFClientDecrypt.exe.config
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\bin\Debug\WCFClientDecrypt.exe
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\bin\Debug\WCFClientDecrypt.pdb
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\MainWindow.baml
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.g.resources
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.Properties.Resources.resources
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.csproj.GenerateResource.cache
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.csproj.CoreCompileInputs.cache
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.exe
+D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.pdb
