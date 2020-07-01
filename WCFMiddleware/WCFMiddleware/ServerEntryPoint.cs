@@ -41,6 +41,9 @@ namespace WCFMiddleware
                 case "Decrypted":
                     _service = new DecryptedService();
                     break;
+                case "IsDecrypted":
+                    _service = new IsDecryptedService();
+                    break;
                 default:
                     _service = null;
                     break;
