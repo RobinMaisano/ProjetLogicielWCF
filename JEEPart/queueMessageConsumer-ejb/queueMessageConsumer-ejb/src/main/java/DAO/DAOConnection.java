@@ -1,26 +1,52 @@
 
 package DAO;
 import java.sql.*;  
+import java.util.ArrayList;
 /**
- *
- * @author 
+ *  Make the connection with the database and return everything in the french words list table
+ * 
  */
 public class DAOConnection {
-    public static void main(String args[]){  
-       try (Connection conn = DriverManager.getConnection(
-                "jdbc:oracle:thin:@localhost:1521:orcl2", "system", "Cesi123!")) {
+    
+    //List of french words to be populated by the database result
+    private ArrayList<String> frenchWordsList;
+    
+    //Connect to the Oracle database and populate the list of french words
+    public void getConnection(){
+        
+        this.frenchWordsList = new ArrayList<>();
+        
+        try{  
+        //load the driver class  
+        Class.forName("oracle.jdbc.driver.OracleDriver");  
 
-            if (conn != null) {
-                System.out.println("Connected to the database!");
-            } else {
-                System.out.println("Failed to make connection!");
-            }
+        // create the connection object  
+        Connection con =DriverManager.getConnection(  
+        "jdbc:oracle:thin:@localhost:1521:frenchDictio","system","Cesi123!");  
 
-        } catch (SQLException e) {
-            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
+        //create the statement object  
+        Statement stmt = con.createStatement();  
+
+        //execute query  
+        ResultSet rs = stmt.executeQuery("SELECT * FROM sys.french_words");  
+        
+        //populate the list with the database result
+        while(rs.next()){
+            this.frenchWordsList.add(rs.getString(1));
+            //System.out.println("word : " + rs.getString(1));  
         }
+        
+        //close the connection object  
+        con.close();  
 
-    }  
+        }catch(Exception e){ 
+            System.out.println(e);
+        }  
+
+    } 
+    
+    // return the list of french words in an arrayList
+    public ArrayList<String> getDictionnary(){
+        return this.frenchWordsList;
+    }
 }

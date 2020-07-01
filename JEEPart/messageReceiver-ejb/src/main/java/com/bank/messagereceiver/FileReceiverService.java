@@ -60,39 +60,19 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
         //utilisation de l'API JAX-B de gestion de flux pour marshaller (transformer) l'objet //Payment en chaine XML
         JAXBContext jaxbContext;
         String[] messageObject = new String[3];
-        messageObject[0] = message;
-        messageObject[1] = key;
         messageObject[2] = fileName;
         String concatMessage = message + "\n" + key + "\n" + fileName;
 
         try {
             //obtention d'une instance JAXBContext associée au type Payment annoté avec JAX-B
-            jaxbContext = JAXBContext.newInstance(String.class);
-            //création d'un Marshaller pour transfomer l'objet Java en flux XML
-            /*Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-            
-            StringWriter writer = new StringWriter();
-            
-            //transformation de l'objet en flux XML stocké dans un Writer
-            jaxbMarshaller.marshal(messageObject, writer);
-            String xmlMessage = writer.toString();
-            //affichage du XML dans la console de sortie
-            System.out.println(xmlMessage);*/
-            
+            //jaxbContext = JAXBContext.newInstance(String.class);
+                        
             TextMessage msg = context.createTextMessage(concatMessage);
-            //TextMessage msg = context.createTextMessage(messageObject[0]);
-            //ObjectMessage o = context.createObjectMessage(messageObject);
-            //MapMessage mapMessage = context.createMapMessage();
-            //mapMessage.setString("Message", message);
-            //mapMessage.setString("Key", key);
-            //mapMessage.setString("fileName", fileName);
             
             //Send the message to the messageQueue
             context.createProducer().send(messageQueue, msg);
             
-            //context.createProducer().send(messageQueue, o);
-            //context.createProducer().send(messageQueue, mapMessage);
-            System.out.println("Message : " + messageObject[0] + " has been sent to the queue messageQueue!");
+            System.out.println("Message from file named : " + messageObject[2] + ", has been sent to the queue messageQueue!");
             
 
         } catch (Exception ex) {

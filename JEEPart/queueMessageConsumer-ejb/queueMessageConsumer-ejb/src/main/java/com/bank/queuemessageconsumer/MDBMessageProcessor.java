@@ -1,5 +1,6 @@
 package com.bank.queuemessageconsumer;
 
+import com.bank.msgchecker.FileChecker;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
@@ -23,18 +24,20 @@ public class MDBMessageProcessor implements MessageListener {
     
     @Override
     public void onMessage(Message message) {
+        boolean isFileChecked;
+        FileChecker f = new FileChecker();
         
         try {
-            //on extrait le paiment du corps du message. - getBody est une méthode JMS 2.0
-            //String paymentMessage = message.getBody(String.class);
-           System.out.println("message test : " + message.getBody(String.class));
-           //System.out.println("message.toString : " + message.toString()); 
-            //for(int i = 0; i<=40;i++){
-               // System.out.println(paymentMessage);
-            //}
+
+            System.out.println("Message received from the JMS Queue : " + message.getBody(String.class));
+            
+            isFileChecked=f.checkFile(message.getBody(String.class));
+            
+            System.out.println("Is file checked : " + isFileChecked);
+                        
             
         } catch (JMSException ex) {
-            //Logger.getLogger(MDBMessageProcessor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MDBMessageProcessor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
