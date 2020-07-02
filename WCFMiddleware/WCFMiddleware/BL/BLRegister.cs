@@ -17,7 +17,7 @@ namespace WCFMiddleware
 
         public bool Register(string login, string password, string[] groups)
         {
-            DAO DAO = DAO.Instance;
+            //DAO DAO = DAO.Instance;
             //TODO: handle groups
 
             //DAO.Users.Add(user);
@@ -26,19 +26,19 @@ namespace WCFMiddleware
             //string name = DAO.Privileges.ToList().First().Name;
             //Console.WriteLine(name);
 
-            Console.WriteLine("List of all users:");
+            //Console.WriteLine("List of all users:");
 
-            foreach (var item in DAO.Users.ToList())
-            {
-                string _login = item.Login;
-                Console.WriteLine("\n" + item.Login);
-                item.Privileges.ToList().ForEach(p => Console.WriteLine(p.Name));
+            //foreach (var item in DAO.Users.ToList())
+            //{
+            //    string _login = item.Login;
+            //    Console.WriteLine("\n" + item.Login);
+            //    item.Privileges.ToList().ForEach(p => Console.WriteLine(p.Name));
 
-            }
+            //}
 
             //return DAO.AddUser(login, password);
             //return DAO.Users.First().Login;
-            return true;
+            throw new NotImplementedException();
         }
     }
 }

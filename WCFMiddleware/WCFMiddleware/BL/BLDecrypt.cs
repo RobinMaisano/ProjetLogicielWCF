@@ -26,7 +26,6 @@ namespace WCFMiddleware
 
             while (i < maximumKey && decryptionInformations.Decrypted != true)
             {
-                Console.WriteLine(FSH.changed);
                 //Generate Key
                 string key = GenerateKey(i);
 
@@ -41,7 +40,6 @@ namespace WCFMiddleware
                 i++;
                 FSH.FileStatus.TryGetValue(fileName, out decryptionInformations);
 
-                //Console.WriteLine(contentDecrypted);
             }
         }
 
@@ -81,7 +79,6 @@ namespace WCFMiddleware
             Byte[] bytesContent = Encoding.UTF8.GetBytes(content);
 
             FileReceiverEndpClient client = new FileReceiverEndpClient();
-            Console.WriteLine("content : "+content);
             client.messageReader(bytesContent, key, fileName);
 
             Thread.Sleep(200);

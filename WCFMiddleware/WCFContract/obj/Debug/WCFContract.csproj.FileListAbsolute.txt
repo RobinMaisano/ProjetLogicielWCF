@@ -4,3 +4,9 @@ D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFContr
 D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFContract\obj\Debug\WCFContract.csproj.CoreCompileInputs.cache
 D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFContract\obj\Debug\WCFContract.dll
 D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFContract\obj\Debug\WCFContract.pdb
+E:\Projects\ProjetLogicielWCF\WCFMiddleware\WCFContract\bin\Debug\WCFContract.dll
+E:\Projects\ProjetLogicielWCF\WCFMiddleware\WCFContract\bin\Debug\WCFContract.pdb
+E:\Projects\ProjetLogicielWCF\WCFMiddleware\WCFContract\obj\Debug\WCFContract.csprojAssemblyReference.cache
+E:\Projects\ProjetLogicielWCF\WCFMiddleware\WCFContract\obj\Debug\WCFContract.csproj.CoreCompileInputs.cache
+E:\Projects\ProjetLogicielWCF\WCFMiddleware\WCFContract\obj\Debug\WCFContract.dll
+E:\Projects\ProjetLogicielWCF\WCFMiddleware\WCFContract\obj\Debug\WCFContract.pdb

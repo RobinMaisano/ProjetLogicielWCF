@@ -37,7 +37,6 @@ namespace WCFMiddleware
                     {
                         _message.info = "Logged in successfully";
                         _message.statusOp = true;
-                        Console.WriteLine("Returned token: " + _message.tokenUser);
                     }
                 }
                 else

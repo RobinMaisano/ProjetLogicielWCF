@@ -11,7 +11,6 @@ namespace WCFMiddleware
 
         private static FileStatusHandler _instance = null;
         private static readonly object _lock = new object();
-        public string changed = "false";
         public static FileStatusHandler Instance
         {
             get
