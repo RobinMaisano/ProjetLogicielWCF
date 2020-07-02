@@ -24,7 +24,9 @@ public class FileChecker{
         String[] splitInfo = message.split("\\n+");
         String secret ="";
         
-        System.out.println("\nStart to process a file");
+        System.out.println("\n");
+
+        System.out.println("Start to process a file with key : " + splitInfo[1]);
         
         //revert from String to byte[]
         byte[] originalByte = Base64.getDecoder().decode(splitInfo[0]);
@@ -48,16 +50,21 @@ public class FileChecker{
                 }
                 
                 if(isFrench){
-                    System.out.println("\n*******************************************************************************");
-                    System.out.println("The following file is in french : \n\t" + splitInfo[0] );
+                    System.out.println("\n");
+                    System.out.println("*******************************************************************************");
+                    System.out.println("The following file is in french : ");
+                    System.out.println("\n");
+                    System.out.println(splitInfo[0]);
                     System.out.println("The file name is  : " + splitInfo[2] );
                     System.out.println("Decoded with the key : " + splitInfo[1] );
                     System.out.println("*******************************************************************************\n");
                   
                   if(isSecretFound){
-                      System.out.println("\n*******************************************************************************");
-                      System.out.println("The secret has been found :  "+secret);
-                      System.out.println("*******************************************************************************\n");
+                      System.out.println("*******************************************************************************");
+                      System.out.println("The secret information has been found : "+secret);
+                      System.out.println("*******************************************************************************");
+                  }else{
+                       System.out.println("The secret information wasn't in this file.");
                   }
                 }else {
                     System.out.println("File '"+splitInfo[2]+"' is french : " + isFrench);
@@ -67,15 +74,6 @@ public class FileChecker{
             System.out.println("Error during translation from encoded base 64 to string : "+ e.getMessage());
         }
         
-      
-        
-        
-        
-        /*try {
-            splitInfo[0] = URLDecoder.decode(new String(splitInfo[0].getBytes("ISO-8859-1"), "UTF-8"), "UTF-8");
-        } catch (Exception e) {
-            System.out.println("Error during translation from ISO-8859-1 to UTF-8");
-        }*/
          System.out.println("Processing of a file ended\n");
 
         return true;

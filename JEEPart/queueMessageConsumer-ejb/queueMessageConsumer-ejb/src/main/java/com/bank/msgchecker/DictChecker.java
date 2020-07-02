@@ -28,7 +28,7 @@ public class DictChecker implements IChecker{
         // verify if a word is a french word
         for (String singleWord : singleWordArray) {
             //System.out.println("single word " + i + " : " + singleWord[i]);
-            //deal with the apostrophe
+            //FOR LATER deal with the apostrophe, coma and dot
             
             /*if (singleWord.contains("'")){
                 System.out.println("APOSTROPHE BEFORE: " + singleWord);
@@ -38,17 +38,22 @@ public class DictChecker implements IChecker{
             }*/
             
             if(singleWord.contains(",")){
-                //System.out.println("COMA FOUnd BEFORE: " + singleWord);
-                apostropheLikeWords = singleWord.split(",");
-                singleWord = apostropheLikeWords[0];
-                //System.out.println("COMA FOUnd AFTER: " + singleWord);
+                //System.out.println("COMA FOUND BEFORE: " + singleWord);
+                try {
+                    apostropheLikeWords = singleWord.split(",");
+                    singleWord = apostropheLikeWords[0];
+                } catch (Exception e) {
+                    //System.out.println("Exception when trying to delete the coma");
+                }
+                
+                //System.out.println("COMA FOUND AFTER: " + singleWord);
             }
             
             /*if(singleWord.contains(".")){
-                System.out.println("DOT FOUnd BEFORE: " + singleWord);
+                System.out.println("DOT FOUND BEFORE: " + singleWord);
                 apostropheLikeWords = singleWord.split(".");
                 singleWord = apostropheLikeWords[0];
-                System.out.println("DOT FOUnd AFTER: " + singleWord);
+                System.out.println("DOT FOUND AFTER: " + singleWord);
             }*/
             
             if (dictionnary.contains(singleWord)) {
