@@ -4,7 +4,9 @@
   <xs:element name="messageReaderResponse" type="tns:messageReaderResponse" />
   <xs:complexType name="messageReader">
     <xs:sequence>
-      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element minOccurs="0" name="message" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="key" type="xs:string" />
+      <xs:element minOccurs="0" name="fileName" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="messageReaderResponse">

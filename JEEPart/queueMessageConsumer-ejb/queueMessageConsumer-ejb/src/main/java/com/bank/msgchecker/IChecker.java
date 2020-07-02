@@ -5,6 +5,6 @@ package com.bank.msgchecker;
  * 
  */
 public interface IChecker {
-    //check the content or the data in the dictionnary
+    //check the data in the dictionnary
     public boolean check(String text);
 }

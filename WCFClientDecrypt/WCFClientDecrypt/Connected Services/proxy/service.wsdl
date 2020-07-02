@@ -170,15 +170,30 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="ServerEntryPointJava" type="tns:IServerEntryPoint">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="m_service">
+      <soap:operation soapAction="http://tempuri.org/IServerEntryPoint/m_service" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ServerEntryPoint">
     <wsdl:port name="ServerEntryPoint" binding="tns:ServerEntryPoint">
       <soap12:address location="net.tcp://localhost:8010/Serveur/Service" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8010/Serveur/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-FAD6312\pblue</Upn>
+          <Upn>Everstormz-PC\Everstormz</Upn>
         </Identity>
       </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="ServerEntryPointJava" binding="tns:ServerEntryPointJava">
+      <soap:address location="http://localhost:8012/Serveur/Service" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

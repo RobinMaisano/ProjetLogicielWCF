@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace WCFContract
 {
     [DataContract]
+    [KnownType(typeof(Dictionary<string, string>))]
     public struct MSG
     {
         [DataMember]

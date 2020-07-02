@@ -20,7 +20,7 @@
 
             var users = new List<User>
             {
-                new User{Login="fantou", Password="root", Email="robin.maisano@gmail.com", Privileges = new List<Privilege>() },
+                new User{Login="fantou", Password="Cesi123!", Email="robin.maisano@gmail.com", Privileges = new List<Privilege>() },
                 new User{Login="michel", Password="root", Email="michel@gmail.com", Privileges = new List<Privilege>() },
                 new User{Login="tata", Password="toto", Email="tata@yahoo.com", Privileges = new List<Privilege>() }
             };
@@ -37,7 +37,9 @@
             {
                 new Service{ Name="Register", PrivilegeID=3 },
                 new Service{ Name="Login", PrivilegeID=3 },
-                new Service{ Name="Decrypt", PrivilegeID=2 }
+                new Service{ Name="Decrypt", PrivilegeID=2 },
+                new Service{ Name="Decrypted", PrivilegeID=2 },
+                new Service{ Name="IsDecrypted", PrivilegeID=2 }
             };
 
             var accreditations = new List<Accreditation>

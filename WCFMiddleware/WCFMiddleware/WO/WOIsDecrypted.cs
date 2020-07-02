@@ -17,7 +17,7 @@ namespace WCFMiddleware
                 if (FSH.FileStatus[fileName].Decrypted == true)
                 {
                     results[i].Add("title", FSH.FileStatus[fileName].FileName);
-                    results[i].Add("content", BLDecrypt.DecryptString(FSH.FileStatus[fileName].Key, FSH.FileStatus[fileName].OriginalFileContent));
+                    results[i].Add("content", BLDecrypt.DecryptStringToString(FSH.FileStatus[fileName].Key, FSH.FileStatus[fileName].OriginalFileContent));
                     results[i].Add("key", FSH.FileStatus[fileName].Key);
                     results[i].Add("trust", FSH.FileStatus[fileName].Trust.ToString());
                     results[i].Add("secretInfo", FSH.FileStatus[fileName].SecretInfo);

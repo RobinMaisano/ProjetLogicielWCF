@@ -29,18 +29,15 @@ public class MDBMessageProcessor implements MessageListener {
         
         try {
 
-            System.out.println("Message received from the JMS Queue : " + message.getBody(String.class));
+            //System.out.println("\nMessage received from the JMS Queue : " + message.getBody(String.class));
             
             isFileChecked=f.checkFile(message.getBody(String.class));
             
-            System.out.println("Is file checked : " + isFileChecked);
+            //System.out.println("Is file checked : " + isFileChecked);
                         
-            
         } catch (JMSException ex) {
             Logger.getLogger(MDBMessageProcessor.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        
     }
     
 }

@@ -13,3 +13,18 @@ D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFC
 D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.csproj.CoreCompileInputs.cache
 D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.exe
 D:\FFOutput\ProjetDEv2020\github content\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.pdb
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\bin\Debug\WCFClientDecrypt.exe.config
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\bin\Debug\WCFClientDecrypt.exe
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\bin\Debug\WCFClientDecrypt.pdb
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.csprojAssemblyReference.cache
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\MainWindow.g.cs
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\App.g.cs
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt_MarkupCompile.cache
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt_MarkupCompile.lref
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\MainWindow.baml
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.g.resources
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.Properties.Resources.resources
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.csproj.GenerateResource.cache
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.csproj.CoreCompileInputs.cache
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.exe
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFClientDecrypt\WCFClientDecrypt\obj\Debug\WCFClientDecrypt.pdb

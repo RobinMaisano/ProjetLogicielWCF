@@ -18,3 +18,5 @@ D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFServe
 D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFServer\obj\Debug\WCFServer.csproj.CopyComplete
 D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFServer\obj\Debug\WCFServer.exe
 D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFServer\obj\Debug\WCFServer.pdb
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFServer\bin\Debug\itextsharp.dll
+D:\Documents\CESI\CESI_JEE_PROJECT\Code\ProjetLogicielWCF\WCFMiddleware\WCFServer\bin\Debug\itextsharp.xml

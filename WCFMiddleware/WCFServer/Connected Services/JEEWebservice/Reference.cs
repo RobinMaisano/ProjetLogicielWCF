@@ -15,7 +15,7 @@ namespace WCFServer.JEEWebservice {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://messagereceiver.bank.com/", ConfigurationName="JEEWebservice.FileReceiverEndp")]
     public interface FileReceiverEndp {
         
-        // CODEGEN : La génération du contrat de message depuis le nom d'élément message de l'espace de noms  n'est pas marqué nillable
+        // CODEGEN : La génération du contrat de message depuis le nom d'élément key de l'espace de noms  n'est pas marqué nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://messagereceiver.bank.com/FileReceiverEndp/messageReaderRequest", ReplyAction="http://messagereceiver.bank.com/FileReceiverEndp/messageReaderResponse")]
         WCFServer.JEEWebservice.messageReaderResponse messageReader(WCFServer.JEEWebservice.messageReaderRequest request);
         
@@ -46,14 +46,22 @@ namespace WCFServer.JEEWebservice {
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class messageReaderRequestBody {
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string message;
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public byte[] message;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string key;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string fileName;
         
         public messageReaderRequestBody() {
         }
         
-        public messageReaderRequestBody(string message) {
+        public messageReaderRequestBody(byte[] message, string key, string fileName) {
             this.message = message;
+            this.key = key;
+            this.fileName = fileName;
         }
     }
     
@@ -123,10 +131,12 @@ namespace WCFServer.JEEWebservice {
             return base.Channel.messageReader(request);
         }
         
-        public string messageReader(string message) {
+        public string messageReader(byte[] message, string key, string fileName) {
             WCFServer.JEEWebservice.messageReaderRequest inValue = new WCFServer.JEEWebservice.messageReaderRequest();
             inValue.Body = new WCFServer.JEEWebservice.messageReaderRequestBody();
             inValue.Body.message = message;
+            inValue.Body.key = key;
+            inValue.Body.fileName = fileName;
             WCFServer.JEEWebservice.messageReaderResponse retVal = ((WCFServer.JEEWebservice.FileReceiverEndp)(this)).messageReader(inValue);
             return retVal.Body.messageReceived;
         }
@@ -136,10 +146,12 @@ namespace WCFServer.JEEWebservice {
             return base.Channel.messageReaderAsync(request);
         }
         
-        public System.Threading.Tasks.Task<WCFServer.JEEWebservice.messageReaderResponse> messageReaderAsync(string message) {
+        public System.Threading.Tasks.Task<WCFServer.JEEWebservice.messageReaderResponse> messageReaderAsync(byte[] message, string key, string fileName) {
             WCFServer.JEEWebservice.messageReaderRequest inValue = new WCFServer.JEEWebservice.messageReaderRequest();
             inValue.Body = new WCFServer.JEEWebservice.messageReaderRequestBody();
             inValue.Body.message = message;
+            inValue.Body.key = key;
+            inValue.Body.fileName = fileName;
             return ((WCFServer.JEEWebservice.FileReceiverEndp)(this)).messageReaderAsync(inValue);
         }
     }

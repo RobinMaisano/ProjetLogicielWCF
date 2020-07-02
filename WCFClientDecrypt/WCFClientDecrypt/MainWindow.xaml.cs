@@ -292,7 +292,7 @@ namespace WCFClientDecrypt
             }
             this.msg.data = predata;
             this.msg = this.controller.m_decrypt(this.msg);
-            string infoAlert = this.msg.info + "\n" + ((Dictionary<string, string>)this.msg.data[0])["title"] + "\n" + ((Dictionary<string, string>)this.msg.data[0])["content"] + "\n";
+            string infoAlert = this.msg.info + "\n";
 
             //condition if Decrypt result is good
             if (this.msg.statusOp)

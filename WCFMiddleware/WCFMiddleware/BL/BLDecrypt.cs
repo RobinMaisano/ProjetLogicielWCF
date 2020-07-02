@@ -31,7 +31,8 @@ namespace WCFMiddleware
                 string key = GenerateKey(i);
 
                 //Decrypt String
-                string contentDecrypted = DecryptString(key, fileContent);
+                //string contentDecrypted = DecryptString(key, fileContent);
+                string contentDecrypted = DecryptStringToString(key, fileContent);
 
 
                 //Send Decrypted Content to JavaEE
@@ -47,12 +48,12 @@ namespace WCFMiddleware
         public string GenerateKey(int keyNb)
         {
             return alphabet[(int)(keyNb / Math.Pow(alphabet.Length, 3))] + ""
-                                    + alphabet[(int)(keyNb / Math.Pow(alphabet.Length, 2))] + ""
-                                    + alphabet[(int)(keyNb / alphabet.Length)] + ""
-                                    + alphabet[keyNb % alphabet.Length];
+                    + alphabet[(int)((keyNb % Math.Pow(alphabet.Length, 3)) / Math.Pow(alphabet.Length, 2))] + ""
+                    + alphabet[(int)((keyNb % Math.Pow(alphabet.Length, 2)) / Math.Pow(alphabet.Length, 1))] + ""
+                    + alphabet[keyNb % alphabet.Length];
         }
 
-        public string DecryptString(string key, string textToDecrypt)
+        public Byte[] DecryptStringToByteArray(string key, string textToDecrypt)
         {
             ASCIIEncoding ascii = new ASCIIEncoding();
             Byte[] bytesString = ascii.GetBytes(textToDecrypt);
@@ -62,15 +63,26 @@ namespace WCFMiddleware
             for (int i = 0; i < bytesString.Length; i++)
                 bytesDecrypted[i] = (Byte)(bytesString[i] ^ bytesKey[i % keyLength]);
 
-            return ascii.GetString(bytesDecrypted);
+            return bytesDecrypted;
+        }
+
+        public string DecryptStringToString(string key, string textToDecrypt)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < textToDecrypt.Length; i++)
+                sb.Append((char) (textToDecrypt[i] ^ key[i % keyLength]));
+
+            return sb.ToString();
         }
 
         public void SendToJava(string fileName, string content, string key)
         {
+            Byte[] bytesContent = Encoding.UTF8.GetBytes(content);
 
             FileReceiverEndpClient client = new FileReceiverEndpClient();
             Console.WriteLine("content : "+content);
-            client.messageReader(content, key, fileName);
+            client.messageReader(bytesContent, key, fileName);
 
             Thread.Sleep(200);
         }

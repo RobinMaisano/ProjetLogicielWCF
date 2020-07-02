@@ -1,6 +1,10 @@
 package com.bank.messagereceiver;
 
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import javax.jms.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,17 +42,30 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
     
     //Get the message from C#
     @Override
-    public String getMessage(String message, String key, String fileName){
-    //public String getMessage(String message){
-
-        System.out.println("response : " + message);
-        if (message.length() != 0){
+    public String getMessage(byte[] message, String key, String fileName){
+        
+        //debug purpose
+        //System.out.println("Converted message: " + convertedMessage);
+        //System.out.println("response original byte tab: " + message);
+        
+        // encode to string from Byte[]
+        String stringifiedMessage ="";
+        try {
+            stringifiedMessage = Base64.getEncoder().encodeToString(new String(message, StandardCharsets.UTF_8).getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("Error : " + e);
+        }
+        
+        //debug purpose
+        //System.out.println("response String base 64 encoder : " + stringifiedMessage );
+        
+        if (message.length != 0){
             try {
-                sendMessage(message, key, fileName);
+                sendMessage(stringifiedMessage, key, fileName);
             } catch (Exception e) {
-            System.out.println("Exception raised : "+e);
+                System.out.println("Exception raised : "+e);
             }
-            return "Message : " + message + ". Key : " + key + ". File name : " + fileName ;
+            return "Message in file" + fileName +", with key : "+ key +" has been sent to JMS queue." ;
         } 
         else {
             return "Empty parameter";
@@ -57,22 +74,19 @@ public class FileReceiverService implements FileReceiverServiceEndpointInterface
     
     //Translate the received message and send it to the JMS queue
     private void sendMessage(String message, String key, String fileName){
-        //utilisation de l'API JAX-B de gestion de flux pour marshaller (transformer) l'objet //Payment en chaine XML
-        JAXBContext jaxbContext;
+
         String[] messageObject = new String[3];
         messageObject[2] = fileName;
         String concatMessage = message + "\n" + key + "\n" + fileName;
 
         try {
-            //obtention d'une instance JAXBContext associée au type Payment annoté avec JAX-B
-            //jaxbContext = JAXBContext.newInstance(String.class);
                         
             TextMessage msg = context.createTextMessage(concatMessage);
             
             //Send the message to the messageQueue
             context.createProducer().send(messageQueue, msg);
             
-            System.out.println("Message from file named : " + messageObject[2] + ", has been sent to the queue messageQueue!");
+            System.out.println("Message from file named : '" + messageObject[2] + "', has been sent to the JMS queue messageQueue!");
             
 
         } catch (Exception ex) {

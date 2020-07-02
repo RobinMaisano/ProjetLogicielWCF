@@ -131,7 +131,7 @@ namespace WCFMiddleware
                 sb.Append($"<p>Key: { infos.Key }</p>");
                 sb.Append($"<p>Confidence: { infos.Trust }</p>");
                 sb.Append($"<p>Secret Information: { infos.SecretInfo }</p>");
-                sb.Append($"<p>Content: { BLDecrypt.DecryptString(infos.Key, infos.OriginalFileContent) }</p>");
+                sb.Append($"<p>Content: { BLDecrypt.DecryptStringToString(infos.Key, infos.OriginalFileContent) }</p>");
                 sb.Append("</li>");
                 sb.Append("<br>");
             }
@@ -157,7 +157,7 @@ namespace WCFMiddleware
                         byte[] bytes = memoryStream.ToArray();
                         memoryStream.Close();
 
-                        MailMessage mm = new MailMessage("gradoxis@gmail.com", user.Email);
+                        MailMessage mm = new MailMessage("cesiwcf@gmail.com", user.Email);
                         mm.Subject = "Decryption Results";
                         mm.Body = "Find results in pdf attached";
                         mm.Attachments.Add(new Attachment(new MemoryStream(bytes), "decryptionResults.pdf"));
@@ -166,8 +166,8 @@ namespace WCFMiddleware
                         smtp.Host = "smtp.gmail.com";
                         smtp.EnableSsl = true;
                         NetworkCredential credential = new NetworkCredential();
-                        credential.UserName = "gradoxis@gmail.com";
-                        credential.Password = "XXXX";
+                        credential.UserName = "cesiwcf@gmail.com";
+                        credential.Password = "Cesi123$";
                         smtp.UseDefaultCredentials = true;
                         smtp.Credentials = credential;
                         smtp.Port = 587;

@@ -19,7 +19,7 @@ namespace WCFClientDecrypt
         public Connection()
         {
             this.msg = new MSG();
-            this.prox = new proxy.ServerEntryPointClient();
+            this.prox = new proxy.ServerEntryPointClient("ServerEntryPoint");
         }
 
         public void Set_middleware_test(Fake_middleware_test middleware_test)

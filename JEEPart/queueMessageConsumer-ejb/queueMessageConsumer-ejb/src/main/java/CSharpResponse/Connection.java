@@ -7,4 +7,6 @@ package CSharpResponse;
  */
 public class Connection {
     
+    
+    
 }
