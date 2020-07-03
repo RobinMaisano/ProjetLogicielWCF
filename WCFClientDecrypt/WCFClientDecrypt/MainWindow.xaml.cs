@@ -180,7 +180,7 @@ namespace WCFClientDecrypt
         {
             Regex rgxlogin = new Regex(@"^[A-z]+$");
             Regex rgxpassword = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
-            Regex rgxmail = new Regex(@"^/\S+@\S+\.\S+/$");
+            Regex rgxmail = new Regex(@"^\S+@\S+\.\S+$");
             if(rgxlogin.IsMatch(this.loginBox.Text) && rgxpassword.IsMatch(this.passwordBox.Password) && rgxmail.IsMatch(this.emailBox.Text))
             {
                 this.user.Setlogin(this.loginBox.Text);
@@ -190,23 +190,25 @@ namespace WCFClientDecrypt
                 preData[1] = this.passwordBox.Password;
                 preData[2] = this.emailBox.Text;
                 this.msg.data = preData;
-                this.msg = this.controller.m_register(this.msg);
-                string infoAlert = this.msg.info + "\n";
+                Thread t = new Thread(new ThreadStart(this.RegisterMsgRequest));
+                t.Start();
+                //this.msg = this.controller.m_register(this.msg);
+                //string infoAlert = this.msg.info + "\n";
 
-                //condition if register result is good
-                if (this.msg.statusOp)
-                {
-                    this.labelUsername.Content = this.user.Getlogin();
-                    infoAlert = infoAlert + "Register successful";
-                    MessageBox.Show(infoAlert);
-                    this.ChangeLayoutLoggedIn();
-                }
-                else
-                {
-                    infoAlert = infoAlert + "Register failed";
-                    MessageBox.Show(infoAlert);
-                }
-                //TODO show|treat result of msg
+                ////condition if register result is good
+                //if (this.msg.statusOp)
+                //{
+                //    this.labelUsername.Content = this.user.Getlogin();
+                //    infoAlert = infoAlert + "Register successful";
+                //    MessageBox.Show(infoAlert);
+                //    this.ChangeLayoutLoggedIn();
+                //}
+                //else
+                //{
+                //    infoAlert = infoAlert + "Register failed";
+                //    MessageBox.Show(infoAlert);
+                //}
+                ////TODO show|treat result of msg
             }
             else
             {
@@ -227,6 +229,26 @@ namespace WCFClientDecrypt
             }
         }
 
+        public void RegisterMsgRequest()
+        {
+            this.msg = this.controller.m_register(this.msg);
+            string infoAlert = this.msg.info + "\n";
+
+            //condition if register result is good
+            if (this.msg.statusOp)
+            {
+                this.labelUsername.Content = this.user.Getlogin();
+                infoAlert = infoAlert + "Register successful";
+                MessageBox.Show(infoAlert);
+                this.ChangeLayoutLoggedIn();
+            }
+            else
+            {
+                infoAlert = infoAlert + "Register failed";
+                MessageBox.Show(infoAlert);
+            }
+        }
+
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             Regex rgxlogin = new Regex(@"^[A-z]+$");
@@ -239,23 +261,25 @@ namespace WCFClientDecrypt
                 preData[0] = this.loginBox.Text;
                 preData[1] = this.passwordBox.Password;
                 this.msg.data = preData;
-                
-                this.msg = this.controller.m_login(this.msg);
-                string infoAlert = this.msg.info + "\n";
 
-                //condition if login result is good
-                if (this.msg.statusOp)
-                {
-                    this.labelUsername.Content = this.user.Getlogin();
-                    infoAlert = infoAlert + "Login successful";
-                    MessageBox.Show(infoAlert);
-                    this.ChangeLayoutLoggedIn();
-                }
-                else
-                {
-                    infoAlert = infoAlert + "Login failed";
-                    MessageBox.Show(infoAlert);
-                }
+                Thread t = new Thread(new ThreadStart(this.LoginMsgRequest));
+                t.Start();
+                //this.msg = this.controller.m_login(this.msg);
+                //string infoAlert = this.msg.info + "\n";
+
+                ////condition if login result is good
+                //if (this.msg.statusOp)
+                //{
+                //    this.labelUsername.Content = this.user.Getlogin();
+                //    infoAlert = infoAlert + "Login successful";
+                //    MessageBox.Show(infoAlert);
+                //    this.ChangeLayoutLoggedIn();
+                //}
+                //else
+                //{
+                //    infoAlert = infoAlert + "Login failed";
+                //    MessageBox.Show(infoAlert);
+                //}
             }
             else
             {
@@ -268,6 +292,26 @@ namespace WCFClientDecrypt
                 {
                     infoAlert = infoAlert + "Password must be at least 8 character long, contain a Lowercase, an Uppercase, a number and a special character \n";
                 }
+                MessageBox.Show(infoAlert);
+            }
+        }
+
+        public void LoginMsgRequest()
+        {
+            this.msg = this.controller.m_login(this.msg);
+            string infoAlert = this.msg.info + "\n";
+
+            //condition if login result is good
+            if (this.msg.statusOp)
+            {
+                this.labelUsername.Content = this.user.Getlogin();
+                infoAlert = infoAlert + "Login successful";
+                MessageBox.Show(infoAlert);
+                this.ChangeLayoutLoggedIn();
+            }
+            else
+            {
+                infoAlert = infoAlert + "Login failed";
                 MessageBox.Show(infoAlert);
             }
         }
@@ -299,6 +343,37 @@ namespace WCFClientDecrypt
                 k++;
             }
             this.msg.data = predata;
+
+            Thread t = new Thread(new ThreadStart(this.DecryptMsgRequest));
+            //t.Start();
+            //this.msg = this.controller.m_decrypt(this.msg);
+            //string infoAlert = this.msg.info + "\n";
+
+            ////condition if Decrypt result is good
+            //if (this.msg.statusOp)
+            //{
+            //    infoAlert = infoAlert + "Decrypt Request successful";
+            //    MessageBox.Show(infoAlert);
+            //    // TODO 
+            //    // Start request Checking
+            //    // replace with creation of specialized class and call of procedure with thread 
+            //    // pass callback by instancing ResultWriter
+            //    // Check if TextBlock work as a parameter if not pass window maybe?  prob wont work but whatev
+            //    // As expected there is a problem with passing the textbox (described as being the property of another thread)
+            //    this.resultHandler = new ResultHandler(this.msg, this.ResultBlock, this.controller, new MsgHandlerDelegate(ResultWriter));
+            //    Thread t = new Thread(new ThreadStart(resultHandler.ResultRequestStarter));
+            //    t.Start();
+            //    //this.msg = this.controller.m_checkIsDecrypted_loop(this.msg);
+            //}
+            //else
+            //{
+            //    infoAlert = infoAlert + "Decrypt Request failed";
+            //    MessageBox.Show(infoAlert);
+            //}
+        }
+
+        public void DecryptMsgRequest()
+        {
             this.msg = this.controller.m_decrypt(this.msg);
             string infoAlert = this.msg.info + "\n";
 
