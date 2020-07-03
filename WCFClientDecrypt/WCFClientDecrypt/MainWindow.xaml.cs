@@ -231,7 +231,10 @@ namespace WCFClientDecrypt
 
         public void RegisterMsgRequest()
         {
-            this.msg = this.controller.m_register(this.msg);
+            lock (this.controller)
+            {
+                this.msg = this.controller.m_register(this.msg);
+            }
             string infoAlert = this.msg.info + "\n";
 
             //condition if register result is good
@@ -298,7 +301,10 @@ namespace WCFClientDecrypt
 
         public void LoginMsgRequest()
         {
-            this.msg = this.controller.m_login(this.msg);
+            lock (this.controller)
+            {
+                this.msg = this.controller.m_login(this.msg);
+            }
             string infoAlert = this.msg.info + "\n";
 
             //condition if login result is good
@@ -374,7 +380,10 @@ namespace WCFClientDecrypt
 
         public void DecryptMsgRequest()
         {
-            this.msg = this.controller.m_decrypt(this.msg);
+            lock (this.controller)
+            {
+                this.msg = this.controller.m_decrypt(this.msg);
+            }
             string infoAlert = this.msg.info + "\n";
 
             //condition if Decrypt result is good
