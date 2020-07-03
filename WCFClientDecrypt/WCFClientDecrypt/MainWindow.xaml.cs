@@ -240,10 +240,10 @@ namespace WCFClientDecrypt
             //condition if register result is good
             if (this.msg.statusOp)
             {
-                this.labelUsername.Content = this.user.Getlogin();
+                this.labelUsername.Dispatcher.Invoke((Action)(() => { this.labelUsername.Content = this.user.Getlogin(); }));
                 infoAlert = infoAlert + "Register successful";
                 MessageBox.Show(infoAlert);
-                this.ChangeLayoutLoggedIn();
+                this.Dispatcher.Invoke(new Action(this.ChangeLayoutLoggedIn));
             }
             else
             {
@@ -310,10 +310,10 @@ namespace WCFClientDecrypt
             //condition if login result is good
             if (this.msg.statusOp)
             {
-                this.labelUsername.Content = this.user.Getlogin();
+                this.labelUsername.Dispatcher.Invoke((Action)(() => { this.labelUsername.Content = this.user.Getlogin(); } ));
                 infoAlert = infoAlert + "Login successful";
                 MessageBox.Show(infoAlert);
-                this.ChangeLayoutLoggedIn();
+                this.Dispatcher.Invoke(new Action(this.ChangeLayoutLoggedIn));
             }
             else
             {
@@ -351,7 +351,7 @@ namespace WCFClientDecrypt
             this.msg.data = predata;
 
             Thread t = new Thread(new ThreadStart(this.DecryptMsgRequest));
-            //t.Start();
+            t.Start();
             //this.msg = this.controller.m_decrypt(this.msg);
             //string infoAlert = this.msg.info + "\n";
 
