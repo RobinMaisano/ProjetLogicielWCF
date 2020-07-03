@@ -84,6 +84,8 @@ namespace WCFClientDecrypt
 
             this.textBox.Visibility = Visibility.Hidden;
             this.button.Visibility = Visibility.Hidden;
+            this.registerPass.Visibility = Visibility.Hidden;
+            this.DecryptPass.Visibility = Visibility.Hidden;
         }
 
         private void ChangeLayoutLogin()
@@ -115,6 +117,8 @@ namespace WCFClientDecrypt
 
             this.textBox.Visibility = Visibility.Hidden;
             this.button.Visibility = Visibility.Hidden;
+            this.registerPass.Visibility = Visibility.Hidden;
+            this.DecryptPass.Visibility = Visibility.Hidden;
         }
 
         private void ChangeLayoutLoggedIn()
@@ -147,6 +151,8 @@ namespace WCFClientDecrypt
 
             this.textBox.Visibility = Visibility.Hidden;
             this.button.Visibility = Visibility.Hidden;
+            this.registerPass.Visibility = Visibility.Hidden;
+            this.DecryptPass.Visibility = Visibility.Hidden;
         }
 
         private void FillListFile()
@@ -190,6 +196,7 @@ namespace WCFClientDecrypt
                 //condition if register result is good
                 if (this.msg.statusOp)
                 {
+                    this.labelUsername.Content = this.user.Getlogin();
                     infoAlert = infoAlert + "Register successful";
                     MessageBox.Show(infoAlert);
                     this.ChangeLayoutLoggedIn();
@@ -239,6 +246,7 @@ namespace WCFClientDecrypt
                 //condition if login result is good
                 if (this.msg.statusOp)
                 {
+                    this.labelUsername.Content = this.user.Getlogin();
                     infoAlert = infoAlert + "Login successful";
                     MessageBox.Show(infoAlert);
                     this.ChangeLayoutLoggedIn();
