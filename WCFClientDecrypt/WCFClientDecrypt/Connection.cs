@@ -41,7 +41,10 @@ namespace WCFClientDecrypt
             }
             try
             {
-                this.msg = this.prox.m_service(this.msg);
+                lock (this.prox)
+                {
+                    this.msg = this.prox.m_service(this.msg);
+                }
             }
             catch(EndpointNotFoundException ex)
             {
